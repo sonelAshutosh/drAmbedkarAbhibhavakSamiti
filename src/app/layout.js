@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
 
 export const metadata = {
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
         className={`antialiased bg-primary-base text-primary-dark dark:bg-primary-dark  dark:text-primary-base`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   )

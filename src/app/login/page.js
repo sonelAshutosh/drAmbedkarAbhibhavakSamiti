@@ -5,14 +5,41 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
+import { login } from './actions'
+import { toast } from '@/hooks/use-toast'
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
+  const router = useRouter()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('Logging in with:', { email, password })
+  const handleSubmit = async (formData) => {
+    const result = await login(formData)
+
+    if (result.status === 'error') {
+      setError(result.message)
+      toast({
+        title: 'Error',
+        description: result.message,
+        variant: 'destructive',
+      })
+    } else {
+      const { user, accessToken } = result
+
+      document.cookie = `accessToken=${accessToken}; path=/; Secure`
+      document.cookie = `userId=${user.id}; path=/; Secure`
+
+      toast({
+        title: 'Success',
+        message: 'Login successful',
+        type: 'success',
+      })
+
+      router.push('/admin')
+    }
   }
 
   return (
@@ -25,11 +52,14 @@ export default function LoginPage() {
             Dr. Ambedkar Abhibhavak Samiti
           </CardTitle>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {/* Empowering Education */}
+            Admin Login
           </p>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form
+            action={async (formData) => handleSubmit(formData)}
+            className="space-y-4"
+          >
             <div>
               <Label
                 htmlFor="email"
@@ -40,10 +70,11 @@ export default function LoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                name="email"
+                placeholder=""
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 w-full"
+                className="mt-1 w-full border border-primary-dark dark:border-primary-base"
                 required
               />
             </div>
@@ -57,10 +88,11 @@ export default function LoginPage() {
               <Input
                 id="password"
                 type="password"
-                placeholder="Enter your password"
+                name="password"
+                placeholder=""
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 w-full"
+                className="mt-1 w-full border border-primary-dark dark:border-primary-base"
                 required
               />
             </div>
