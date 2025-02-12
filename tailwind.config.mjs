@@ -8,18 +8,17 @@ const tailwindConfig = {
   ],
   theme: {
     extend: {
-      // TODO: Add custom colors
       colors: {
         primary: {
-          base: '#ffedff',
-          dark: '#6c0089',
+          base: '#ffffff',
+          dark: '#333333',
         },
         secondary: {
-          base: '#b200e3',
-          dark: '#24002e',
+          base: '#7ec8e3',
+          dark: '#002b5b',
         },
         accent: {
-          base: '#91e600',
+          base: '#008000',
         },
       },
       borderRadius: {
