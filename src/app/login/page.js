@@ -4,9 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { useState } from 'react'
-import { login } from './actions'
 import { toast } from '@/hooks/use-toast'
+
+import { login } from './actions'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
@@ -29,8 +30,8 @@ export default function LoginPage() {
     } else {
       const { user, accessToken } = result
 
-      document.cookie = `accessToken=${accessToken}; path=/; Secure`
-      document.cookie = `userId=${user.id}; path=/; Secure`
+      document.cookie = `accessToken=${accessToken}; path=/; Secure; SameSite=None`
+      document.cookie = `userId=${user.id}; path=/; Secure; SameSite=None`
 
       toast({
         title: 'Success',
@@ -44,14 +45,14 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-primary-base dark:bg-primary-dark px-4 sm:px-6 lg:px-8">
-      <Card className="w-full max-w-sm border border-gray-200 shadow-lg dark:border-gray-700">
+      <Card className="w-full max-w-sm border border-primary-dark shadow-lg dark:border-primary-base">
         <CardHeader className="flex flex-col items-center">
           {/* // TODO Add Logo Image */}
           {/* <img src="/logo-placeholder.png" alt="Organization Logo" className="h-16 w-16 mb-2" /> */}
           <CardTitle className="text-center text-primary-dark dark:text-primary-base">
             Dr. Ambedkar Abhibhavak Samiti
           </CardTitle>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-primary-dark/50 dark:text-primary-base/50 font-semibold tracking-wide">
             Admin Login
           </p>
         </CardHeader>
@@ -96,10 +97,7 @@ export default function LoginPage() {
                 required
               />
             </div>
-            <Button
-              type="submit"
-              className="w-full bg-accent-base text-primary-base dark:text-primary-dark hover:bg-green-700"
-            >
+            <Button type="submit" className="w-full">
               Sign In
             </Button>
           </form>
