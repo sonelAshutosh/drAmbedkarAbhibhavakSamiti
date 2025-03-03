@@ -1,7 +1,15 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Home, User, Settings, LogOut, Box, Database } from 'lucide-react'
+import {
+  Home,
+  User,
+  Settings,
+  LogOut,
+  Box,
+  Database,
+  User2,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Tooltip,
@@ -21,9 +29,7 @@ const menuItems = [
   { name: 'Users', icon: User, route: '/admin/users' },
 ]
 
-const settingsItems = [
-  { name: 'General', icon: Settings, route: '/admin/settings' },
-]
+const settingsItems = [{ name: 'Users', icon: User2, route: '/admin/users' }]
 
 const AdminNav = () => {
   const router = useRouter()

@@ -7,7 +7,7 @@ function AdminLayout({ children }) {
       <div className="border-r-2 border-primary-dark/50 dark:border-primary-base/50">
         <AdminNav />
       </div>
-      <div className="w-full">Right</div>
+      <div className="w-full">{children}</div>
     </div>
   )
 }

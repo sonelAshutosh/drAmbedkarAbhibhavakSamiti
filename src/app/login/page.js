@@ -36,7 +36,7 @@ export default function LoginPage() {
       toast({
         title: 'Success',
         message: 'Login successful',
-        type: 'success',
+        variant: 'success',
       })
 
       router.push('/admin')
