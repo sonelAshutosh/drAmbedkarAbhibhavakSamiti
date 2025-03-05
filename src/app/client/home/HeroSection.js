@@ -21,7 +21,7 @@ function HeroSection() {
           <h1>Abhibhavak</h1>
           <h1 className="flex items-baseline">
             Samiti
-            <div className="h-4 w-4 bg-accent-base rounded-full ml-2" />
+            <div className="h-2 w-2 md:h-4 md:w-4 bg-accent-base rounded-full ml-2" />
           </h1>
         </div>
 
