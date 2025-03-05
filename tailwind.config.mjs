@@ -18,7 +18,7 @@ const tailwindConfig = {
           dark: '#002b5b',
         },
         accent: {
-          base: '#008000',
+          base: '#00bd00',
           dark: '#005c00',
         },
       },

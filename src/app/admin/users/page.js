@@ -84,8 +84,8 @@ function UsersPage() {
 
   return (
     <div className="py-4 px-4 lg:px-24">
-      <div className="flex justify-between">
-        <div>Users</div>
+      <div className="flex justify-between py-2">
+        <div className="text-lg tracking-wider font-semibold">Users</div>
         <div>
           <Sheet>
             <SheetTrigger>
@@ -148,14 +148,14 @@ function UsersPage() {
       <div>
         <Table>
           <TableCaption>Create or Modify User access</TableCaption>
-          <TableHeader>
+          <TableHeader className="border-2">
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="border-2">
             {users?.map((user) => (
               <TableRow key={user.email}>
                 <TableCell className="font-medium">{user.name}</TableCell>

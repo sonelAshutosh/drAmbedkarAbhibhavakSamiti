@@ -11,3 +11,14 @@ body {
     --radius: 0.5rem;
   }
 }
+
+/* Hide scrollbar in Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar in IE, Firefox and Edge */
+html {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
