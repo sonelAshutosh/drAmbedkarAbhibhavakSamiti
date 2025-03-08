@@ -1,9 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 
-function HeroSection() {
+function HeroSection({ className }) {
   return (
-    <div className="relative w-full h-screen text-secondary-base">
+    <div
+      className={`relative w-full h-screen text-secondary-base ${className}`}
+    >
       {/* Background Image */}
       <Image
         src="/images/hero_section_1.jpg"
