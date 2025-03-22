@@ -160,7 +160,7 @@ function UsersPage() {
               <TableRow key={user.email}>
                 <TableCell className="font-medium">{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                {user.email === 'admin@gmail.com' ? (
+                {user.email === 'su@gmail.com' ? (
                   <TableCell></TableCell>
                 ) : (
                   <TableCell onClick={() => handleDelete(user.email)}>
