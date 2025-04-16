@@ -3,35 +3,36 @@
 import { Search, Menu, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { LanguageContext } from '@/lib/languageContext.js'
 
-const navItems = [
-  { name: 'Home', link: '/client/home' },
-  { name: 'Sectors', link: '/client/sectors' },
-  { name: 'Residents', link: '/client/residents' },
-  { name: 'Visiting', link: '/client/visiting' },
-  { name: 'About Us', link: '/client/about' },
-]
+const navItems = {
+  en: [
+    { name: 'Home', link: '/client/home' },
+    { name: 'Sectors', link: '/client/sectors' },
+    { name: 'Residents', link: '/client/residents' },
+    { name: 'Visiting', link: '/client/visiting' },
+    { name: 'About Us', link: '/client/about' },
+  ],
+  hi: [
+    { name: 'मुखपृष्ठ', link: '/client/home' },
+    { name: 'क्षेत्र', link: '/client/sectors' },
+    { name: 'निवासी', link: '/client/residents' },
+    { name: 'दौरा करना', link: '/client/visiting' },
+    { name: 'हमारे बारे में', link: '/client/about' },
+  ],
+}
+
+const fontSizeOptions = {
+  en: { increase: 'A+', decrease: 'A-', reset: 'A' },
+  hi: { increase: 'ब+', decrease: 'ब-', reset: 'ब' },
+}
 
 const Navbar = () => {
+  const { language, changeLanguage } = useContext(LanguageContext)
+
   const [search, setSearch] = useState('')
-  const [language, setLanguage] = useState('en')
   const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem('language')
-    if (storedLanguage) {
-      setLanguage(storedLanguage)
-    } else {
-      localStorage.setItem('language', 'en')
-      setLanguage('en')
-    }
-  }, [])
-
-  const handleLanguageChange = (lang) => {
-    setLanguage(lang)
-    localStorage.setItem('language', lang)
-  }
 
   return (
     <nav>
@@ -43,7 +44,7 @@ const Navbar = () => {
               ? 'bg-primary-dark/50 px-1 rounded-sm'
               : 'hover:bg-primary-dark/50 px-1 rounded-sm'
           }`}
-          onClick={() => handleLanguageChange('en')}
+          onClick={() => changeLanguage('en')}
         >
           English
         </div>
@@ -53,19 +54,20 @@ const Navbar = () => {
               ? 'bg-primary-dark/50 px-1 rounded-sm'
               : 'hover:bg-primary-dark/50 px-1 rounded-sm'
           }`}
-          onClick={() => handleLanguageChange('hi')}
+          onClick={() => changeLanguage('hi')}
         >
           हिन्दी
         </div>
         <div className="hover:bg-primary-dark/50 px-1 rounded-sm cursor-pointer">
-          A+
+          {fontSizeOptions[language].increase}
         </div>
         <div className="hover:bg-primary-dark/50 px-1 rounded-sm cursor-pointer">
-          A-
+          {fontSizeOptions[language].reset}
         </div>
         <div className="hover:bg-primary-dark/50 px-1 rounded-sm cursor-pointer">
-          A
+          {fontSizeOptions[language].decrease}
         </div>
+
         <div className="relative hidden lg:block">
           <input
             type="search"
@@ -94,7 +96,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex space-x-6">
-          {navItems.map((item, index) => (
+          {navItems[language].map((item, index) => (
             <li key={index} className="hover:underline cursor-pointer">
               <Link href={item.link}>{item.name}</Link>
             </li>
@@ -123,7 +125,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <ul className="flex flex-col items-start mt-16 space-y-6 px-6 text-primary-base">
-          {navItems.map((item, index) => (
+          {navItems[language].map((item, index) => (
             <li key={index} className="hover:underline cursor-pointer">
               <Link href={item.link}>{item.name}</Link>
             </li>

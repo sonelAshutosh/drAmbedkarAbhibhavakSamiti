@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion'
 import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
-import PageTransition from '@/components/PageTransitions'
+import { LanguageProvider } from '@/lib/languageContext'
 
 export const metadata = {
   title: 'Dr. Ambedkar Abhibhavak Samiti',
@@ -13,10 +13,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="antialiased bg-primary-base text-primary-dark dark:bg-primary-dark dark:text-primary-base">
         <AnimatePresence mode="wait">
-          <PageTransition>
+          <LanguageProvider>
             {children}
             <Toaster />
-          </PageTransition>
+          </LanguageProvider>
         </AnimatePresence>
       </body>
     </html>
