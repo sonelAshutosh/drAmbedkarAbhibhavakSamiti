@@ -1,14 +1,6 @@
 'use client'
 
-import {
-  Calendar,
-  Inbox,
-  LogOut,
-  Search,
-  Settings,
-  UserRound,
-  Users2,
-} from 'lucide-react'
+import { LogOut, TicketCheck, UserRound, Users2 } from 'lucide-react'
 
 import {
   Sidebar,
@@ -34,6 +26,11 @@ const orgItems = [
     title: 'Members',
     url: '/admin/members',
     icon: Users2,
+  },
+  {
+    title: 'Certificates',
+    url: '/admin/certificates',
+    icon: TicketCheck,
   },
 ]
 
