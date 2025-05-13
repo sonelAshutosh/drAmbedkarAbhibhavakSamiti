@@ -10,7 +10,7 @@ async function dbConnect() {
 
   try {
     const db = await mongoose.connect(
-      `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.b5kfc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0` ||
+      `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.b5kfc.mongodb.net/drAmbedkarAbhibhavakSamiti?retryWrites=true&w=majority&appName=Cluster0` ||
         '',
       {}
     )

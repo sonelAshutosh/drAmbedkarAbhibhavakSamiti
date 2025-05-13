@@ -1,6 +1,14 @@
 'use client'
 
-import { Calendar, Inbox, LogOut, Search, Settings, Users2 } from 'lucide-react'
+import {
+  Calendar,
+  Inbox,
+  LogOut,
+  Search,
+  Settings,
+  UserRound,
+  Users2,
+} from 'lucide-react'
 
 import {
   Sidebar,
@@ -16,10 +24,15 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 
-const items = [
+const orgItems = [
   {
     title: 'Users',
     url: '/admin/users',
+    icon: UserRound,
+  },
+  {
+    title: 'Members',
+    url: '/admin/members',
     icon: Users2,
   },
 ]
@@ -38,10 +51,10 @@ function AdminNav() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          {/* <SidebarGroupLabel>Application</SidebarGroupLabel> */}
+          <SidebarGroupLabel>Organsiation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {orgItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link href={item.url}>
@@ -52,6 +65,12 @@ function AdminNav() {
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>School</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>{/* //TODO: Add school items */}</SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
