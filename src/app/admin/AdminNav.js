@@ -3,6 +3,7 @@
 import {
   LogOut,
   Mail,
+  MessageSquare,
   Phone,
   TicketCheck,
   UserRound,
@@ -48,6 +49,11 @@ const orgItems = [
     title: 'Contacted Persons',
     url: '/admin/contactedPerson',
     icon: Phone,
+  },
+  {
+    title: 'Testimonials',
+    url: '/admin/testimonials',
+    icon: MessageSquare,
   },
 ]
 

@@ -83,7 +83,7 @@ function UsersPage() {
   }
 
   return (
-    <div className="py-4 px-4 lg:px-24">
+    <div className="py-4 px-4 lg:px-20">
       <div className="flex justify-between py-2">
         <div className="text-lg tracking-wider font-semibold">Users</div>
         <div>

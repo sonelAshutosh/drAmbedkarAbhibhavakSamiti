@@ -52,7 +52,7 @@ function MembersPage() {
   }, [])
 
   return (
-    <div className="py-4 px-4 lg:px-24 text-secondary-dark">
+    <div className="py-4 px-4 lg:px-20 text-secondary-dark">
       <div className="flex justify-between py-2">
         <div className="text-lg tracking-wider font-semibold">Our Members</div>
         <MemberForm onMemberAdded={fetchData} />
