@@ -27,10 +27,12 @@ function CertificateForm({ onCertificateAdded }) {
   const handleImageChange = async (e) => {
     const file = e.target.files[0]
     const compressedFile = await imageCompression(file, {
-      maxSizeMB: 0.05,
-      maxWidthOrHeight: 1920,
+      maxSizeMB: 0.1,
+      maxWidthOrHeight: 2560,
+      initialQuality: 0.5,
       useWebWorker: true,
     })
+
     const base64 = await convertToBase64(compressedFile)
     setPreview({ myFile: base64 })
   }
