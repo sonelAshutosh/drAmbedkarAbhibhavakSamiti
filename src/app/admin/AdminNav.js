@@ -1,6 +1,9 @@
 'use client'
 
 import {
+  HandCoins,
+  Image,
+  LayoutGrid,
   LogOut,
   Mail,
   MessageSquare,
@@ -36,6 +39,11 @@ const orgItems = [
     icon: Users2,
   },
   {
+    title: 'Volunteers',
+    url: '/admin/volunteers',
+    icon: Users2,
+  },
+  {
     title: 'Certificates',
     url: '/admin/certificates',
     icon: TicketCheck,
@@ -54,6 +62,21 @@ const orgItems = [
     title: 'Testimonials',
     url: '/admin/testimonials',
     icon: MessageSquare,
+  },
+  {
+    title: 'Campaigns',
+    url: '/admin/campaigns',
+    icon: LayoutGrid,
+  },
+  {
+    title: 'Gallery',
+    url: '/admin/gallery',
+    icon: Image,
+  },
+  {
+    title: 'Donators',
+    url: '/admin/donators',
+    icon: HandCoins,
   },
 ]
 

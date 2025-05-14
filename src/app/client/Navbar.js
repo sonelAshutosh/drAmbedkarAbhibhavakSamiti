@@ -9,17 +9,21 @@ import { LanguageContext } from '@/lib/languageContext.js'
 const navItems = {
   en: [
     { name: 'Home', link: '/client/home' },
-    { name: 'Sectors', link: '/client/sectors' },
-    { name: 'Residents', link: '/client/residents' },
-    { name: 'Visiting', link: '/client/visiting' },
+    { name: 'Campaigns', link: '/client/campaigns' },
+    { name: 'Gallery', link: '/client/gallery' },
+    { name: 'Certificates', link: '/client/certificates' },
+    { name: 'School', link: '/client/school' },
     { name: 'About Us', link: '/client/about' },
+    { name: 'Contact Us', link: '/client/contact-us' },
   ],
   hi: [
     { name: 'मुखपृष्ठ', link: '/client/home' },
-    { name: 'क्षेत्र', link: '/client/sectors' },
-    { name: 'निवासी', link: '/client/residents' },
-    { name: 'दौरा करना', link: '/client/visiting' },
+    { name: 'अभियान', link: '/client/campaigns' },
+    { name: 'गैलरी', link: '/client/gallery' },
+    { name: 'प्रमाण पत्र', link: '/client/certificates' },
+    { name: 'विद्यालय', link: '/client/school' },
     { name: 'हमारे बारे में', link: '/client/about' },
+    { name: 'संपर्क करें', link: '/client/contact-us' },
   ],
 }
 
@@ -97,7 +101,10 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden lg:flex space-x-6">
           {navItems[language].map((item, index) => (
-            <li key={index} className="hover:underline cursor-pointer">
+            <li
+              key={index}
+              className="hover:underline font-semibold cursor-pointer"
+            >
               <Link href={item.link}>{item.name}</Link>
             </li>
           ))}

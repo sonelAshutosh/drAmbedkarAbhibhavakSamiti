@@ -1,6 +1,7 @@
 'use client'
 
 import { LanguageContext } from '@/lib/languageContext'
+import Link from 'next/link'
 import React, { useState, useEffect, useContext } from 'react'
 
 const translations = {
@@ -41,14 +42,18 @@ const HeroSection = () => {
         {/* Buttons */}
         <div className="mt-6 flex justify-center items-center flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
           {/* Join Us Button */}
-          <button className="w-full sm:w-auto min-w-[140px] bg-gradient-to-r from-accent-base to-secondary-base text-primary-dark px-6 md:px-8 py-3 rounded-lg font-semibold text-lg shadow-lg transition-all border-2 border-accent-base duration-300 hover:from-transparent hover:to-transparent hover:text-primary-base hover:border-accent-base hover:border-2">
-            {translations[language].joinUs}
-          </button>
+          <Link href={'/client/contact-us'}>
+            <button className="w-full sm:w-auto min-w-[140px] bg-gradient-to-r from-accent-base to-secondary-base text-primary-dark px-6 md:px-8 py-3 rounded-lg font-semibold text-lg shadow-lg transition-all border-2 border-accent-base duration-300 hover:from-transparent hover:to-transparent hover:text-primary-base hover:border-accent-base hover:border-2">
+              {translations[language].joinUs}
+            </button>
+          </Link>
 
           {/* Donate Button */}
-          <button className="w-full sm:w-auto min-w-[140px] border-2 border-accent-base text-primary-base dark:text-primary-base px-6 md:px-8 py-3 rounded-lg font-semibold text-lg shadow-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-accent-base hover:to-secondary-base hover:text-primary-dark">
-            {translations[language].donate}
-          </button>
+          <Link href={'/client/donate'}>
+            <button className="w-full sm:w-auto min-w-[140px] border-2 border-accent-base text-primary-base dark:text-primary-base px-6 md:px-8 py-3 rounded-lg font-semibold text-lg shadow-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-accent-base hover:to-secondary-base hover:text-primary-dark">
+              {translations[language].donate}
+            </button>
+          </Link>
         </div>
       </div>
     </div>
