@@ -13,7 +13,7 @@ const navItems = {
     { name: 'Gallery', link: '/client/gallery' },
     { name: 'Certificates', link: '/client/certificates' },
     { name: 'School', link: '/client/school' },
-    { name: 'About Us', link: '/client/about' },
+    { name: 'About Us', link: '/client/about-us' },
     { name: 'Contact Us', link: '/client/contact-us' },
   ],
   hi: [
