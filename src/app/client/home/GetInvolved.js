@@ -9,27 +9,29 @@ const texts = {
   en: {
     donateTitle: 'Donate',
     donateDescription:
-      'Support our cause by scanning the UPI QR code (UPI ID: 42360534745@sbi). Use any UPI app to donate.',
+      'Support our cause by scanning the UPI QR code. Use any UPI app to donate.',
     volunteerTitle: 'Volunteer',
     volunteerDescription:
       'Join us to make a difference—contact us to get started.',
     membershipTitle: 'Reach Us',
     membershipDescription:
-      'For further inquiries, email us at info@ngo.org or call 123-456-7890.',
+      'For further inquiries, email us at drambedkarabhibhavaksamiti@gmail.com or call 123-456-7890',
     donateNow: 'Donate Now',
+    becomeVolunteer: 'Join Us',
     contactUs: 'Contact Us',
   },
   hi: {
     donateTitle: 'दान करें',
     donateDescription:
-      'हमारे इस मिशन का समर्थन करने के लिए UPI QR कोड स्कैन करें (UPI ID: 42360534745@sbi)। किसी भी UPI ऐप का उपयोग करके दान करें।',
+      'हमारे इस मिशन का समर्थन करने के लिए UPI QR कोड स्कैन करें। किसी भी UPI ऐप का उपयोग करके दान करें।',
     volunteerTitle: 'स्वयंसेवक बनें',
     volunteerDescription:
       'हमारे साथ जुड़ें और बदलाव लाने में मदद करें—शुरू करने के लिए हमसे संपर्क करें।',
     membershipTitle: 'संपर्क करें',
     membershipDescription:
-      'अधिक जानकारी के लिए, हमें info@ngo.org पर ईमेल करें या 123-456-7890 पर कॉल करें।',
+      'अधिक जानकारी के लिए, हमें drambedkarabhibhavaksamiti@gmail.com पर ईमेल करें या 123-456-7890 पर कॉल करें।',
     donateNow: 'अभी दान करें',
+    becomeVolunteer: 'हमसे जुड़ें',
     contactUs: 'संपर्क करें',
   },
 }
@@ -45,6 +47,7 @@ const GetInvolved = () => {
     membershipDescription,
     donateNow,
     contactUs,
+    becomeVolunteer,
   } = texts[language]
 
   return (
@@ -67,28 +70,26 @@ const GetInvolved = () => {
             <h3 className="text-2xl font-semibold text-black mb-4">
               {donateTitle}
             </h3>
-            {/* UPI QR Code Image - replace '/images/upi-qr-code.png' with the actual QR code image URL */}
             <div className="w-40 h-40 mb-4">
               <Image
-                src="/images/upi-qr-code.png"
+                src="/images/upi_logo.png"
                 alt="UPI QR Code"
                 width={160}
                 height={160}
-                className="object-contain"
+                className="object-contain rounded-full border-2 border-secondary-dark"
               />
             </div>
-            <p className="text-primary-dark/90 text-sm mb-4">
+            <p className="text-primary-dark/90 text-sm mb-4 px-12">
               {donateDescription}
             </p>
             <Link
-              href="/donate"
+              href="/client/donate"
               className="bg-accent-base text-white px-6 py-2 rounded-lg shadow hover:bg-accent-dark transition"
             >
               {donateNow}
             </Link>
           </div>
 
-          {/* Volunteer Card */}
           <div className="bg-primary-base/95 rounded-xl shadow-md p-6 flex flex-col items-center text-center">
             <h3 className="text-2xl font-semibold text-secondary-dark mb-4">
               {volunteerTitle}
@@ -99,17 +100,17 @@ const GetInvolved = () => {
                 alt="Volunteer"
                 width={160}
                 height={160}
-                className="object-contain"
+                className="object-contain rounded-full border-2 border-secondary-dark"
               />
             </div>
-            <p className="text-primary-dark/90 text-sm mb-4">
+            <p className="text-primary-dark/90 text-sm mb-4 px-12">
               {volunteerDescription}
             </p>
             <Link
-              href="/contact"
+              href="/client/contact-us"
               className="bg-accent-base text-white px-6 py-2 rounded-lg shadow hover:bg-accent-dark transition"
             >
-              {contactUs}
+              {becomeVolunteer}
             </Link>
           </div>
 
@@ -120,21 +121,21 @@ const GetInvolved = () => {
             </h3>
             <div className="w-40 h-40 mb-4">
               <Image
-                src="/images/membership.png"
+                src="/images/reach_us.png"
                 alt="Reach Us"
                 width={160}
                 height={160}
-                className="object-contain"
+                className="object-contain rounded-full border-2 border-secondary-dark"
               />
             </div>
-            <p className="text-primary-dark/90 text-sm mb-4">
+            <p className="text-primary-dark/90 text-sm mb-4 px-12">
               {membershipDescription}
             </p>
             <Link
-              href="/contact" // Update URL if needed
+              href="/client/contact-us"
               className="bg-accent-base text-white px-6 py-2 rounded-lg shadow hover:bg-accent-dark transition"
             >
-              {language === 'hi' ? 'संपर्क करें' : 'Contact Us'}
+              {contactUs}
             </Link>
           </div>
         </div>
