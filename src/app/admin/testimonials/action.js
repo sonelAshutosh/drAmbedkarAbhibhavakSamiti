@@ -18,7 +18,7 @@ export async function getTestimonials(getVerified = false) {
 
     return {
       status: 'success',
-      testimonials: testimonialsJSON,
+      data: testimonialsJSON,
     }
   } catch (error) {
     return {
