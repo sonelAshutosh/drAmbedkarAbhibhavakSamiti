@@ -13,102 +13,81 @@ import {
 } from '@/components/ui/sheet'
 import { useToast } from '@/hooks/use-toast'
 import { createDonation } from '@/app/admin/donators/action'
+import { useContext } from 'react'
+import { LanguageContext } from '@/lib/languageContext.js'
 
-const UserDataForm = ({ handleFormSubmit }) => {
+const translations = {
+  en: {
+    name: 'Name',
+    email: 'Email',
+    phone: 'Mobile Number',
+    amount: 'Amount Donated',
+    paymentMode: 'Payment Mode',
+    transactionId: 'Transaction ID',
+    submit: 'Submit',
+    formPrompt: '*After donating, please fill up the form -',
+    link: 'Link',
+    enterDetails: 'Enter Your Details',
+    successTitle: 'Your Details Submitted Successfully',
+    successDesc: 'Your name will be displayed on our website shortly.',
+    errorTitle: 'Error',
+    errorDesc: 'An error occurred while submitting your details.',
+    fillForm: 'Fill Up the Form',
+  },
+  hi: {
+    name: 'नाम',
+    email: 'ईमेल',
+    phone: 'मोबाइल नंबर',
+    amount: 'दान राशि',
+    paymentMode: 'भुगतान का तरीका',
+    transactionId: 'लेनदेन आईडी',
+    submit: 'जमा करें',
+    formPrompt: '*दान करने के बाद कृपया फॉर्म भरें -',
+    link: 'लिंक',
+    enterDetails: 'अपना विवरण दर्ज करें',
+    successTitle: 'आपका विवरण सफलतापूर्वक सबमिट हुआ',
+    successDesc: 'आपका नाम जल्द ही हमारी वेबसाइट पर प्रदर्शित होगा।',
+    errorTitle: 'त्रुटि',
+    errorDesc: 'विवरण सबमिट करते समय कोई त्रुटि हुई।',
+    fillForm: 'फॉर्म भरें',
+  },
+}
+
+const UserDataForm = ({ handleFormSubmit, language, translations }) => {
+  const t = translations[language]
   return (
-    <div>
-      <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
-        <Input
-          className="dark:bg-primary-dark/20"
-          type="text"
-          name="name"
-          placeholder="Name"
-          required
-        />
-        <Input
-          className="dark:bg-primary-dark/20"
-          type="email"
-          name="email"
-          placeholder="Email"
-          required
-        />
-        <Input
-          className="dark:bg-primary-dark/20"
-          type="tel"
-          name="phone"
-          placeholder="Mobile Number"
-          required
-        />
-        <Input
-          className="dark:bg-primary-dark/20"
-          type="number"
-          name="amount"
-          placeholder="Amount Donated"
-          required
-        />
-        <Input
-          className="dark:bg-primary-dark/20"
-          type="string"
-          name="paymentMode"
-          placeholder="Payment Mode"
-          required
-        />
-        <Input
-          className="dark:bg-primary-dark/20"
-          type="text"
-          name="transactionId"
-          placeholder="Transacton Id"
-          required
-        />
-
-        <Button type="submit" className="w-full">
-          Submit
-        </Button>
-      </form>
-    </div>
+    <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
+      <Input name="name" placeholder={t.name} required />
+      <Input name="email" type="email" placeholder={t.email} required />
+      <Input name="phone" type="tel" placeholder={t.phone} required />
+      <Input name="amount" type="number" placeholder={t.amount} required />
+      <Input name="paymentMode" placeholder={t.paymentMode} required />
+      <Input name="transactionId" placeholder={t.transactionId} required />
+      <Button type="submit" className="w-full">
+        {t.submit}
+      </Button>
+    </form>
   )
 }
 
 function DonationForm() {
+  const { language } = useContext(LanguageContext)
   const { toast } = useToast()
+  const t = translations[language]
 
   const handleFormSubmit = async (e) => {
     e.preventDefault()
-
     const formData = new FormData(e.target)
-    const name = formData.get('name')
-    const email = formData.get('email')
-    const phone = formData.get('phone')
-    const amount = formData.get('amount')
-    const paymentMode = formData.get('paymentMode')
-    const transactionId = formData.get('transactionId')
 
     try {
-      const res = await createDonation({
-        name,
-        email,
-        phone,
-        amount,
-        paymentMode,
-        transactionId,
-      })
+      const res = await createDonation(Object.fromEntries(formData.entries()))
       if (res.status === 'success') {
-        toast({
-          title: 'Your Details Submitted Successfully',
-          description: 'Your name will be displayed on Our website shortly.',
-        })
+        toast({ title: t.successTitle, description: t.successDesc })
       } else {
-        toast({
-          title: 'Error',
-          description: 'An error occurred while submitting your details.',
-        })
+        toast({ title: t.errorTitle, description: t.errorDesc })
       }
-    } catch (error) {
-      console.log(error)
-      toast({
-        title: 'Error',
-        description: 'An error occurred while submitting your details.',
-      })
+    } catch {
+      toast({ title: t.errorTitle, description: t.errorDesc })
     }
   }
 
@@ -118,35 +97,44 @@ function DonationForm() {
         <Sheet>
           <SheetTrigger asChild>
             <p className="text-lg py-1 cursor-pointer">
-              *After donating, please fill up the form -{' '}
+              {t.formPrompt}{' '}
               <span className="cursor-pointer text-secondary-dark hover:scale-105 hover:text-accent-base hover:underline transition-all ease-in-out">
-                Link
+                {t.link}
               </span>
             </p>
           </SheetTrigger>
           <SheetContent className="bg-primary-base dark:bg-secondary-dark dark:text-primary-base">
             <SheetHeader>
-              <SheetTitle className="pb-12">Enter Your Details</SheetTitle>
+              <SheetTitle className="pb-12">{t.enterDetails}</SheetTitle>
               <SheetDescription>
-                <UserDataForm handleFormSubmit={handleFormSubmit} />
+                <UserDataForm
+                  handleFormSubmit={handleFormSubmit}
+                  language={language}
+                  translations={translations}
+                />
               </SheetDescription>
             </SheetHeader>
           </SheetContent>
         </Sheet>
       </div>
+
       <div className="lg:hidden dark:text-primary-base mb-8 w-full flex items-center justify-center">
-        <Sheet key={'bottom'}>
+        <Sheet>
           <SheetTrigger className="border-2 border-secondary-dark dark:border-secondary-base p-4 rounded-lg ">
-            Fill Up the Form
+            {t.fillForm}
           </SheetTrigger>
           <SheetContent
-            side={'bottom'}
+            side="bottom"
             className="bg-primary-base dark:bg-secondary-dark dark:text-primary-base"
           >
             <SheetHeader>
-              <SheetTitle className="pb-12">Enter Your Details</SheetTitle>
+              <SheetTitle className="pb-12">{t.enterDetails}</SheetTitle>
               <SheetDescription>
-                <UserDataForm handleFormSubmit={handleFormSubmit} />
+                <UserDataForm
+                  handleFormSubmit={handleFormSubmit}
+                  language={language}
+                  translations={translations}
+                />
               </SheetDescription>
             </SheetHeader>
           </SheetContent>
