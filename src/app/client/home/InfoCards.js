@@ -12,7 +12,7 @@ const cards = [
     },
     image: '/images/info_cards_bg_1.jpg',
     bgColor: 'bg-blue-500',
-    link: '#',
+    link: '/client/school',
   },
   {
     title: {
@@ -21,7 +21,7 @@ const cards = [
     },
     image: '/images/info_cards_bg_2.jpg',
     bgColor: 'bg-green-600',
-    link: '#',
+    link: '/client/volunteer',
   },
   {
     title: {
@@ -30,7 +30,7 @@ const cards = [
     },
     image: '/images/info_cards_bg_3.jpg',
     bgColor: 'bg-rose-500',
-    link: '#',
+    link: '/client/donate',
   },
   {
     title: {
@@ -39,7 +39,7 @@ const cards = [
     },
     image: '/images/info_cards_bg_3.jpg',
     bgColor: 'bg-fuchsia-600',
-    link: '#',
+    link: '/client/campaigns',
   },
   {
     title: {
@@ -48,7 +48,7 @@ const cards = [
     },
     image: '/images/info_cards_bg_1.jpg',
     bgColor: 'bg-yellow-600',
-    link: '#',
+    link: '/client/campaigns',
   },
   {
     title: {
@@ -57,7 +57,7 @@ const cards = [
     },
     image: '/images/info_cards_bg_2.jpg',
     bgColor: 'bg-indigo-600',
-    link: '#',
+    link: '/client/contact-us',
   },
 ]
 
