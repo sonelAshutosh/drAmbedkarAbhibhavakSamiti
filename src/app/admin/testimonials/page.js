@@ -121,15 +121,17 @@ function TestimondialsPage() {
                   {testimonial.isApproved ? 'Yes' : 'No'}
                 </TableCell>
                 <TableCell>
-                  {testimonial.profileImage && (
-                    <Image
-                      src={testimonial.profileImage}
-                      alt={testimonial.name}
-                      className="w-16 h-16 object-cover rounded-full"
-                      width={64}
-                      height={64}
-                    />
-                  )}
+                  <Image
+                    src={
+                      testimonial.profileImage === ''
+                        ? '/images/dummy_image.jpg'
+                        : testimonial.profileImage
+                    }
+                    alt={testimonial.name}
+                    className="w-16 h-16 object-cover rounded-full"
+                    width={64}
+                    height={64}
+                  />
                 </TableCell>
                 <TableCell>{testimonial.rating} / 5</TableCell>
                 <TableCell>

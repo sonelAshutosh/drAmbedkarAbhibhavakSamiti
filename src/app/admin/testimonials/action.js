@@ -28,6 +28,28 @@ export async function getTestimonials(getVerified = false) {
   }
 }
 
+export async function getLatestTwoTestimonials() {
+  try {
+    await dbConnect()
+    const testimonials = await Testimonials.find({ isApproved: true })
+      .sort({ createdAt: -1 })
+      .limit(2)
+      .lean()
+
+    const testimonialsJSON = JSON.parse(JSON.stringify(testimonials))
+
+    return {
+      status: 'success',
+      data: testimonialsJSON,
+    }
+  } catch (error) {
+    return {
+      status: 'error',
+      message: 'Failed to fetch testimonials. Please try again.',
+    }
+  }
+}
+
 export async function addTestimonial(formData) {
   const name = formData.get('name')
   const message = formData.get('message')
