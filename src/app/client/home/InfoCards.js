@@ -34,16 +34,25 @@ const cards = [
   },
   {
     title: {
-      en: 'Ongoing Initiatives',
-      hi: 'चल रही पहल',
+      en: 'Gallery',
+      hi: 'गैलरी',
     },
     image: '/images/info_cards_bg_3.jpg',
     bgColor: 'bg-fuchsia-600',
-    link: '/client/campaigns',
+    link: '/client/gallery',
   },
+  // {
+  //   title: {
+  //     en: 'Ongoing Initiatives',
+  //     hi: 'चल रही पहल',
+  //   },
+  //   image: '/images/info_cards_bg_3.jpg',
+  //   bgColor: 'bg-fuchsia-600',
+  //   link: '/client/campaigns',
+  // },
   {
     title: {
-      en: 'Events & Workshops',
+      en: 'Events & Campaigns',
       hi: 'कार्यक्रम और कार्यशालाएं',
     },
     image: '/images/info_cards_bg_1.jpg',

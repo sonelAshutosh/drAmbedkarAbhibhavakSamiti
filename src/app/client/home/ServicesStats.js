@@ -15,11 +15,11 @@ const icons = [Store, Smartphone, User, ClipboardList, Network]
 const translations = {
   en: {
     stats: [
-      { label: 'Enrolled Students', count: '210' },
-      { label: 'Classes Conducted', count: '480' },
-      { label: 'Volunteers', count: '25' },
-      { label: 'Schemes Covered', count: '8' },
-      { label: 'Villages Reached', count: '12' },
+      { label: 'Enrolled Students', count: '100' },
+      { label: 'Classes Conducted', count: '250' },
+      { label: 'Volunteers', count: '3' },
+      { label: 'Schemes Covered', count: '1' },
+      { label: 'Villages Reached', count: '1' },
     ],
     title: 'At a Glance',
     infoCards: [
@@ -37,11 +37,11 @@ const translations = {
   },
   hi: {
     stats: [
-      { label: 'नामांकित छात्र', count: '210' },
-      { label: 'कक्षाएँ आयोजित', count: '480' },
-      { label: 'स्वयंसेवक', count: '25' },
-      { label: 'योजनाएँ शामिल', count: '8' },
-      { label: 'गाँवों तक पहुँचा', count: '12' },
+      { label: 'नामांकित छात्र', count: '100' },
+      { label: 'कक्षाएँ आयोजित', count: '250' },
+      { label: 'स्वयंसेवक', count: '3' },
+      { label: 'योजनाएँ शामिल', count: '1' },
+      { label: 'गाँवों तक पहुँचा', count: '1' },
     ],
     title: 'एक नजर में',
     infoCards: [

@@ -20,6 +20,32 @@ export async function getCampaigns() {
   }
 }
 
+export async function getLatestCampaign() {
+  try {
+    await dbConnect()
+
+    const latestCampaign = await Campaigns.findOne().sort({ date: -1 })
+    if (!latestCampaign) {
+      return {
+        status: 'error',
+        message: 'No campaigns found.',
+      }
+    }
+    const latestCampaignJSON = JSON.parse(JSON.stringify(latestCampaign))
+
+    return {
+      status: 'success',
+      data: latestCampaignJSON,
+    }
+  } catch (error) {
+    console.error('Error fetching latest campaign:', error)
+    return {
+      status: 'error',
+      message: 'An error occurred while fetching the latest campaign.',
+    }
+  }
+}
+
 export async function addCampaign(formData) {
   try {
     const name = formData.name
