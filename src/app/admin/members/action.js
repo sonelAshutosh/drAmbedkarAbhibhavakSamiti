@@ -22,6 +22,25 @@ export async function getMembers() {
   }
 }
 
+export async function getTopThreeMembers() {
+  try {
+    await dbConnect()
+
+    const members = await Members.find().sort({ priority: 1 }).limit(3).lean()
+    const membersJSON = JSON.parse(JSON.stringify(members))
+
+    return {
+      status: 'success',
+      data: membersJSON,
+    }
+  } catch (error) {
+    return {
+      status: 'error',
+      message: 'Failed to fetch members',
+    }
+  }
+}
+
 export async function getThreeMembersByPriority() {
   try {
     await dbConnect()
