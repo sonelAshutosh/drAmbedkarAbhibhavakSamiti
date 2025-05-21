@@ -75,7 +75,7 @@ function Volunteers() {
   return (
     <div className="bg-secondary-dark text-primary-base px-4 lg:px-20 pt-12 lg:pt-6">
       <div className="py-20">
-        <h1 className="text-3xl lg:text-6xl flex justify-center text-primary-base tracking-wide font-bold">
+        <h1 className="text-2xl lg:text-6xl flex justify-center text-primary-base tracking-wide font-bold">
           {language === 'hi' ? '... हमारे' : '... Meet Our'}
           <span className="text-accent-base pl-2 lg:pl-4">
             {language === 'hi' ? 'स्वयंसेवक मिलिए ...' : 'Volunteers ...'}
