@@ -131,9 +131,13 @@ const Navbar = () => {
         </button>
 
         {/* Mobile Menu */}
-        <ul className="flex flex-col items-start mt-16 space-y-6 px-6 text-primary-base">
+        <ul className="mt-16 space-y-6 px-6 text-primary-base">
           {navItems[language].map((item, index) => (
-            <li key={index} className="hover:underline cursor-pointer">
+            <li
+              key={index}
+              className="hover:underline cursor-pointer"
+              onClick={() => setMenuOpen(false)}
+            >
               <Link href={item.link}>{item.name}</Link>
             </li>
           ))}

@@ -79,7 +79,7 @@ const GetInvolved = () => {
                 className="object-contain rounded-full border-2 border-secondary-dark"
               />
             </div>
-            <p className="text-primary-dark/90 text-sm mb-4 px-12">
+            <p className="text-primary-dark/90 text-sm mb-4">
               {donateDescription}
             </p>
             <Link
@@ -103,7 +103,7 @@ const GetInvolved = () => {
                 className="object-contain rounded-full border-2 border-secondary-dark"
               />
             </div>
-            <p className="text-primary-dark/90 text-sm mb-4 px-12">
+            <p className="text-primary-dark/90 text-sm mb-4">
               {volunteerDescription}
             </p>
             <Link
@@ -128,7 +128,7 @@ const GetInvolved = () => {
                 className="object-contain rounded-full border-2 border-secondary-dark"
               />
             </div>
-            <p className="text-primary-dark/90 text-sm mb-4 px-12">
+            <p className="text-primary-dark/90 text-sm mb-4">
               {membershipDescription}
             </p>
             <Link
