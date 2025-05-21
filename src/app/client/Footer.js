@@ -31,6 +31,7 @@ const Footer = () => {
         { name: 'Contact Us', url: '/client/contact-us' },
         { name: 'Campaigns', url: '/client/campaigns' },
         { name: 'Certificates', url: '/client/certificates' },
+        { name: 'Volunteers', url: '/client/volunteers' },
         { name: 'Gallery', url: '/client/gallery' },
       ],
     },
@@ -49,6 +50,7 @@ const Footer = () => {
         { name: 'संपर्क करें', url: '/client/contact-us' },
         { name: 'अभियान', url: '/client/campaigns' },
         { name: 'प्रमाण पत्र', url: '/client/certificates' },
+        { name: 'स्वयंसेवक', url: '/client/volunteers' },
         { name: 'गेलरी', url: '/client/gallery' },
       ],
     },
@@ -57,7 +59,7 @@ const Footer = () => {
   return (
     <footer className="text-primary-dark">
       <div
-        className="relative flex items-center justify-between h-[60vh] w-full bg-cover bg-center bg-no-repeat"
+        className="relative flex items-center justify-between lg:h-[60vh] w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/images/footer_bg.jpg')" }}
       >
         {/* Dark overlay */}
