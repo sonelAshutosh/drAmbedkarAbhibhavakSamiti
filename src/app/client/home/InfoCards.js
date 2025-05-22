@@ -41,15 +41,6 @@ const cards = [
     bgColor: 'bg-fuchsia-600',
     link: '/client/gallery',
   },
-  // {
-  //   title: {
-  //     en: 'Ongoing Initiatives',
-  //     hi: 'चल रही पहल',
-  //   },
-  //   image: '/images/info_cards_bg_3.jpg',
-  //   bgColor: 'bg-fuchsia-600',
-  //   link: '/client/campaigns',
-  // },
   {
     title: {
       en: 'Events & Campaigns',
