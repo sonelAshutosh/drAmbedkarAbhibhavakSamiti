@@ -25,7 +25,7 @@ function HeroSection() {
           backgroundImage: "url('/images/school_hero.png')",
         }}
       ></div>
-      <div className="absolute inset-0 bg-primary-dark/60 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-primary-dark/50 backdrop-blur-sm"></div>
 
       <div className="relative z-10 h-full w-full flex flex-col justify-center items-start text-left text-primary-base px-4">
         <h1 className="max-w-6xl text-4xl md:text-6xl font-bold mb-8 leading-tight">
@@ -34,7 +34,7 @@ function HeroSection() {
             {headingParts[1]}
           </span>
         </h1>
-        <p className="text-lg md:text-2xl max-w-3xl bg-gradient-to-r from-primary-base via-secondary-base to-accent-dark bg-clip-text text-transparent font-semibold">
+        <p className="text-lg md:text-2xl max-w-3xl bg-gradient-to-r from-primary-base via-secondary-base to-secondary-dark bg-clip-text text-transparent font-semibold">
           {paragraph}
         </p>
       </div>

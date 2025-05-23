@@ -88,7 +88,7 @@ const schoolItems = [
   },
   {
     title: 'Teachers',
-    url: '/admin/teachers',
+    url: '/admin/faculty',
     icon: Users2,
   },
   {
