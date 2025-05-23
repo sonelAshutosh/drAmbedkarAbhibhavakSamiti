@@ -80,6 +80,24 @@ const orgItems = [
   },
 ]
 
+const schoolItems = [
+  {
+    title: 'Students',
+    url: '/admin/students',
+    icon: UserRound,
+  },
+  {
+    title: 'Teachers',
+    url: '/admin/teachers',
+    icon: Users2,
+  },
+  {
+    title: 'Events',
+    url: '/admin/events',
+    icon: Image,
+  },
+]
+
 function AdminNav() {
   const router = useRouter()
 
@@ -113,7 +131,18 @@ function AdminNav() {
         <SidebarGroup>
           <SidebarGroupLabel>School</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>{/* //TODO: Add school items */}</SidebarMenu>
+            <SidebarMenu>
+              {schoolItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

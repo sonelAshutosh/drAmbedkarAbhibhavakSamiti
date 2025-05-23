@@ -1,10 +1,9 @@
 'use client'
 
-import { getTopThreeStudents } from '@/app/admin/students/action'
+import { getAllStudents } from '@/app/admin/students/action'
 import { LanguageContext } from '@/lib/languageContext'
 import { Mail, Phone } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 
 function StudentCard({ student }) {
@@ -28,7 +27,6 @@ function StudentCard({ student }) {
 
           <div className="hidden group-hover:block transition-all ease-in-out">
             <div className="flex gap-2 pt-2">
-              {/* Phone */}
               {student.phone && (
                 <a
                   href={`tel:${student.phone}`}
@@ -37,7 +35,6 @@ function StudentCard({ student }) {
                   <Phone />
                 </a>
               )}
-              {/* Mail */}
               {student.email && (
                 <a
                   href={`mailto:${student.email}`}
@@ -54,55 +51,41 @@ function StudentCard({ student }) {
   )
 }
 
-function TopStudents() {
+function StudentPage() {
   const { language } = useContext(LanguageContext)
   const [students, setStudents] = useState([])
 
   useEffect(() => {
-    async function fetchData() {
-      const res = await getTopThreeStudents()
+    async function fetchStudents() {
+      const res = await getAllStudents()
 
       if (res.status === 'success') {
         setStudents(res.data)
       }
     }
 
-    fetchData()
+    fetchStudents()
   }, [])
 
   return (
-    <div className="bg-secondary-dark text-primary-base px-4 lg:px-20 pt-12 lg:pt-6">
-      <div className="py-20">
-        <h1 className="text-2xl lg:text-6xl flex justify-center text-primary-base tracking-wide font-bold">
-          {language === 'hi' ? '... हमारे' : '... Meet Our'}
-          <span className="text-accent-base pl-2 lg:pl-4">
-            {language === 'hi' ? 'छात्र मिलिए ...' : 'Top Students ...'}
-          </span>
-        </h1>
+    <div className="px-4 lg:px-20 py-16 bg-secondary-dark/75 text-primary-base min-h-screen">
+      <h1 className="text-2xl lg:text-5xl font-bold text-center">
+        {language === 'hi' ? 'सभी छात्र' : 'All Students'}
+      </h1>
 
-        <div className="pt-16 pb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {students.length > 0 ? (
-            students.map((student) => (
-              <StudentCard key={student._id} student={student} />
-            ))
-          ) : (
-            <p className="text-center text-primary-base/50 col-span-3">
-              {language === 'hi' ? 'कोई छात्र नहीं मिला' : 'No students found'}
-            </p>
-          )}
-        </div>
-
-        <div className="flex justify-end text-primary-base hover:text-accent-base font-semibold tracking-wide">
-          <Link
-            href="/client/school/students"
-            className="text-primary-base font-bold px-4 py-2 hover:underline transition"
-          >
-            {language === 'hi' ? 'सभी देखें' : 'View All'}
-          </Link>
-        </div>
+      <div className="pt-16 pb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {students.length > 0 ? (
+          students.map((student) => (
+            <StudentCard key={student._id} student={student} />
+          ))
+        ) : (
+          <p className="text-center text-primary-base/50 col-span-3">
+            {language === 'hi' ? 'कोई छात्र नहीं मिला' : 'No students found'}
+          </p>
+        )}
       </div>
     </div>
   )
 }
 
-export default TopStudents
+export default StudentPage

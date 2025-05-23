@@ -108,7 +108,7 @@ function TestimondialsPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {testimonials.map((testimonial) => (
+            {testimonials?.map((testimonial) => (
               <TableRow key={testimonial._id}>
                 <TableCell className="font-medium">
                   {testimonial.name}
