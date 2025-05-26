@@ -22,7 +22,7 @@ function TestimondialsPage() {
       const res = await getTestimonials()
 
       if (res.status === 'success') {
-        setTestimonials(res.testimonials)
+        setTestimonials(res.data)
       } else {
         console.error(res.message)
       }
@@ -88,6 +88,8 @@ function TestimondialsPage() {
       }
     }
   }
+
+  console.log(testimonials)
 
   return (
     <div className="py-4 px-4 lg:px-20">
