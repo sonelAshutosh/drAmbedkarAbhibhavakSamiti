@@ -21,29 +21,38 @@ function StudentCard({ student }) {
           />
         </div>
 
-        <div className="absolute bottom-0 left-0 h-12 w-full flex flex-col justify-center bg-gradient-to-br from-primary-base/[0.54] to-accent-base/[0.54] backdrop-blur-lg rounded-bl-lg rounded-br-lg group-hover:h-32 transition-all ease-in-out p-4">
-          <h1 className="text-xl font-semibold tracking-wide">
+        <div className="absolute bottom-0 left-0 h-16 w-full flex flex-col justify-center bg-gradient-to-br from-primary-base/60 to-accent-base/60 backdrop-blur-lg rounded-bl-lg rounded-br-lg group-hover:h-36 transition-all ease-in-out p-4 overflow-hidden">
+          <h1 className="text-xl font-semibold tracking-wide truncate">
             {student.name}
           </h1>
 
-          <div className="hidden group-hover:block transition-all ease-in-out">
+          <div className="hidden group-hover:flex flex-col gap-1 pt-2 text-sm">
+            {student.stream && (
+              <p>
+                <span className="font-medium">Stream:</span> {student.stream}
+              </p>
+            )}
+            <p>
+              <span className="font-medium">Percentage:</span>{' '}
+              {student.percentage ?? 'N/A'}%
+            </p>
+
+            {/* Contact icons */}
             <div className="flex gap-2 pt-2">
-              {/* Phone */}
               {student.phone && (
                 <a
                   href={`tel:${student.phone}`}
                   className="border-2 border-primary-base rounded-lg p-2 hover:scale-105 hover:text-secondary-base hover:border-secondary-base hover:bg-secondary-dark transition-all ease-in-out"
                 >
-                  <Phone />
+                  <Phone size={18} />
                 </a>
               )}
-              {/* Mail */}
               {student.email && (
                 <a
                   href={`mailto:${student.email}`}
                   className="border-2 border-primary-base rounded-lg p-2 hover:scale-105 hover:text-secondary-base hover:border-secondary-base hover:bg-secondary-dark transition-all ease-in-out"
                 >
-                  <Mail />
+                  <Mail size={18} />
                 </a>
               )}
             </div>
