@@ -15,7 +15,7 @@ function AdminPage() {
         </div>
       </div>
       <div className="bg-gray-100 shadow-lg py-8 my-4 rounded-lg">
-        <div className="flex gap-2 items-baseline">
+        <div className="flex gap-2 items-center">
           <ChartLine />
           <span>Analytics Dashboard </span>
           <span className="text-xs text-gray-500">(Coming Soon ...)</span>

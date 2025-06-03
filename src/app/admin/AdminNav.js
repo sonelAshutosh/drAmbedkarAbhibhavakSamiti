@@ -111,10 +111,12 @@ function AdminNav() {
   return (
     <Sidebar>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Organsiation</SidebarGroupLabel>
+        <SidebarGroup className="border-b-2 border-primary-dark/50 dark:border-primary-base/50">
+          <SidebarGroupLabel className="text-lg text-secondary-dark font-semibold tracking-wider">
+            Organsiation
+          </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="text-primary-dark/80">
               {orgItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
@@ -128,10 +130,12 @@ function AdminNav() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel>School</SidebarGroupLabel>
+        <SidebarGroup className="border-b-2 border-primary-dark/50 dark:border-primary-base/50">
+          <SidebarGroupLabel className="text-lg text-secondary-dark font-semibold tracking-wider">
+            School
+          </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="text-primary-dark/80">
               {schoolItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
@@ -146,8 +150,10 @@ function AdminNav() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <Button onClick={handleLogout} variant="destructive" className="w-full">
-        <LogOut />{' '}
+      <Button onClick={handleLogout} variant="destructive" className="">
+        <span className="font-semibold flex gap-3 items-center">
+          Logout <LogOut />
+        </span>
       </Button>
     </Sidebar>
   )
