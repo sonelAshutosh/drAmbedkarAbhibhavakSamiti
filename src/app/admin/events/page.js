@@ -21,15 +21,19 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { toast } from '@/hooks/use-toast'
+import { Skeleton } from '@/components/ui/skeleton' // Import Skeleton
 
 function EventsPage() {
   const [events, setEvents] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchData = async () => {
+    setLoading(true)
     const res = await getEvents()
     if (res.status === 'success') {
       setEvents(res.data)
     }
+    setLoading(false)
   }
 
   const handleDelete = (id) => async () => {
@@ -91,7 +95,34 @@ function EventsPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {events.length > 0 ? (
+            {loading ? (
+              // Render 5 skeleton rows while loading
+              Array.from({ length: 5 }).map((_, idx) => (
+                <TableRow key={idx}>
+                  <TableCell>
+                    <Skeleton className="h-4 w-4" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-16" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-28" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-12" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-10" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-10" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-4" />
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : events.length > 0 ? (
               events.map((event, index) => (
                 <TableRow key={event._id}>
                   <TableCell>{index + 1}</TableCell>
@@ -114,7 +145,7 @@ function EventsPage() {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-4">
+                <TableCell colSpan={7} className="text-center py-4">
                   No events found.
                 </TableCell>
               </TableRow>

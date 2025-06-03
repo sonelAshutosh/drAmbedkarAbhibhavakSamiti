@@ -4,33 +4,36 @@ import {
   Table,
   TableBody,
   TableCaption,
+  TableCell,
   TableHead,
   TableHeader,
   TableRow,
-  TableCell,
 } from '@/components/ui/table'
 import { useEffect, useState } from 'react'
 import { deleteCertificate, getCertificates } from './action'
-
 import Image from 'next/image'
 import { Trash2 } from 'lucide-react'
 import { toast } from '@/hooks/use-toast'
 import CertificateForm from './CertificateForm'
+import { Skeleton } from '@/components/ui/skeleton'
 
 function CertificatesPage() {
   const [certificates, setCertificates] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetchCertificates()
   }, [])
 
   const fetchCertificates = async () => {
+    setLoading(true)
     const res = await getCertificates()
     if (res.status === 'success') {
       setCertificates(res.data)
     } else {
       console.error('Error fetching certificates:', res.message)
     }
+    setLoading(false)
   }
 
   const handleDelete = async (id) => {
@@ -57,25 +60,42 @@ function CertificatesPage() {
           <CertificateForm onCertificateAdded={fetchCertificates} />
         </div>
       </div>
-      <div>
-        <Table>
-          <TableCaption>Manage Certificates</TableCaption>
-          <TableHeader className="border-2">
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Issued By</TableHead>
-              <TableHead>Image</TableHead>
-              <TableHead>Created At</TableHead>
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {certificates.map((cert) => (
-              <TableRow
-                key={cert._id}
-                id={`row-${cert._id}`}
-                className="hover:bg-secondary-dark/10"
-              >
+
+      <Table>
+        <TableCaption>Manage Certificates</TableCaption>
+        <TableHeader className="border-2">
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead>Issued By</TableHead>
+            <TableHead>Image</TableHead>
+            <TableHead>Created At</TableHead>
+            <TableHead>Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {loading ? (
+            Array.from({ length: 3 }).map((_, i) => (
+              <TableRow key={i}>
+                <TableCell>
+                  <Skeleton className="h-4 w-32" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-28" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-12 w-16 rounded" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-24" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-6" />
+                </TableCell>
+              </TableRow>
+            ))
+          ) : certificates.length > 0 ? (
+            certificates.map((cert) => (
+              <TableRow key={cert._id} className="hover:bg-secondary-dark/10">
                 <TableCell>{cert.name}</TableCell>
                 <TableCell>{cert.issuedBy}</TableCell>
                 <TableCell>
@@ -90,17 +110,23 @@ function CertificatesPage() {
                 <TableCell>{cert.createdAt}</TableCell>
                 <TableCell>
                   <div
-                    className="text-red-500"
+                    className="text-red-500 cursor-pointer hover:text-red-700"
                     onClick={() => handleDelete(cert._id)}
                   >
                     <Trash2 />
                   </div>
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center text-gray-500">
+                No certificates found.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </div>
   )
 }

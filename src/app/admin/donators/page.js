@@ -12,12 +12,15 @@ import {
 import React, { useEffect, useState } from 'react'
 import { getDonations, updateDonator } from './action'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Skeleton } from '@/components/ui/skeleton'
 
 function DonatorsPage() {
   const [donatedPerson, setDonatedPerson] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true)
       const res = await getDonations()
 
       if (res.status === 'success') {
@@ -25,6 +28,7 @@ function DonatorsPage() {
       } else {
         console.error(res.message)
       }
+      setLoading(false)
     }
 
     fetchData()
@@ -75,7 +79,37 @@ function DonatorsPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {donatedPerson.length > 0 ? (
+            {loading ? (
+              // Show 4 skeleton rows while loading
+              Array.from({ length: 4 }).map((_, idx) => (
+                <TableRow key={idx}>
+                  <TableCell>
+                    <Skeleton className="h-4 w-12" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-16" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-12" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-8" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-12" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-16" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-8 rounded" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-16" />
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : donatedPerson.length > 0 ? (
               donatedPerson.map((donator) => (
                 <TableRow key={donator._id}>
                   <TableCell>{donator.name}</TableCell>
@@ -109,7 +143,7 @@ function DonatorsPage() {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan="8" className="text-center">
+                <TableCell colSpan={8} className="text-center">
                   No Donated Persons found
                 </TableCell>
               </TableRow>

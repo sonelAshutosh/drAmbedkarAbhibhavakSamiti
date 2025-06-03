@@ -1,7 +1,6 @@
 'use client'
 
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Table,
   TableBody,
@@ -21,9 +20,11 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import * as XLSX from 'xlsx'
+import { Skeleton } from '@/components/ui/skeleton'
 
 function NewsLetterSubscribersPage() {
   const [subscribers, setSubscribers] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchNewsletterSubscribers = async () => {
@@ -44,6 +45,8 @@ function NewsLetterSubscribersPage() {
           description: 'Failed to fetch newsletter subscribers.',
           variant: 'destructive',
         })
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -54,9 +57,7 @@ function NewsLetterSubscribersPage() {
     const result = await deleteNewsletterSubscriber(id)
 
     if (result.status === 'success') {
-      setSubscribers((prevSubscribers) =>
-        prevSubscribers.filter((subscriber) => subscriber._id !== id)
-      )
+      setSubscribers((prev) => prev.filter((s) => s._id !== id))
       toast({
         title: 'Success',
         description: 'Subscriber deleted successfully.',
@@ -70,22 +71,21 @@ function NewsLetterSubscribersPage() {
     }
   }
 
-  const handleDataDownload = async () => {
+  const handleDataDownload = () => {
     if (!subscribers.length) {
       toast({ title: 'No subscribers to download.', variant: 'destructive' })
       return
     }
 
     const data = subscribers.map((s) => ({ Email: s.email }))
-
     const worksheet = XLSX.utils.json_to_sheet(data)
     const workbook = XLSX.utils.book_new()
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Subscribers')
 
     const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
-
     const blob = new Blob([wbout], { type: 'application/octet-stream' })
     const url = URL.createObjectURL(blob)
+
     const a = document.createElement('a')
     a.href = url
     a.download = 'subscribers.xlsx'
@@ -99,7 +99,7 @@ function NewsLetterSubscribersPage() {
     <div className="py-4 px-4 lg:px-20">
       <div className="flex justify-between py-2">
         <div className="text-lg tracking-wider font-semibold">Subscribers</div>
-        <div onClick={handleDataDownload}>
+        <div onClick={handleDataDownload} className="cursor-pointer">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
@@ -112,36 +112,48 @@ function NewsLetterSubscribersPage() {
           </TooltipProvider>
         </div>
       </div>
-      <div>
-        <Table>
-          <TableCaption>Delete Newsletter Subscribers</TableCaption>
-          <TableHeader className="border-2">
-            <TableRow>
-              <TableHead>E-mail</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {subscribers.length > 0 ? (
-              subscribers.map((subscriber) => (
-                <TableRow key={subscriber._id}>
-                  <TableCell>{subscriber.email}</TableCell>
-                  <TableCell>
-                    <button onClick={() => handleDelete(subscriber._id)}>
-                      <Trash2 className="w-4 h-4 text-red-500" />
-                    </button>
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan="7" className="text-center">
-                  No Subscribers found
+
+      <Table>
+        <TableCaption>Delete Newsletter Subscribers</TableCaption>
+        <TableHeader className="border-2">
+          <TableRow>
+            <TableHead>Email</TableHead>
+            <TableHead>Action</TableHead>
+          </TableRow>
+        </TableHeader>
+
+        <TableBody>
+          {loading ? (
+            Array.from({ length: 3 }).map((_, idx) => (
+              <TableRow key={idx}>
+                <TableCell>
+                  <Skeleton className="h-4 w-64" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-6" />
                 </TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+            ))
+          ) : subscribers.length > 0 ? (
+            subscribers.map((subscriber) => (
+              <TableRow key={subscriber._id}>
+                <TableCell>{subscriber.email}</TableCell>
+                <TableCell>
+                  <button onClick={() => handleDelete(subscriber._id)}>
+                    <Trash2 className="w-4 h-4 text-red-500 hover:text-red-700" />
+                  </button>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={2} className="text-center text-gray-500">
+                No subscribers found.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </div>
   )
 }

@@ -21,15 +21,19 @@ import { PlusCircle, Trash2 } from 'lucide-react'
 import FacultyForm from './FacultyForm'
 import { deleteFaculty, getAllFaculty } from './action'
 import { toast } from '@/hooks/use-toast'
+import { Skeleton } from '@/components/ui/skeleton' // Import Skeleton component
 
 function FacultyPage() {
   const [faculty, setFaculty] = useState([])
+  const [loading, setLoading] = useState(true)
 
   async function fetchData() {
+    setLoading(true)
     const res = await getAllFaculty()
     if (res.status === 'success') {
       setFaculty(res.data)
     }
+    setLoading(false)
   }
 
   const handleDelete = (id) => async () => {
@@ -98,28 +102,63 @@ function FacultyPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {faculty.map((fac) => (
-              <TableRow key={fac._id}>
-                <TableCell className="font-medium">{fac.name}</TableCell>
-                <TableCell>{fac.email}</TableCell>
-                <TableCell>{fac.phone}</TableCell>
-                <TableCell>{fac.designation}</TableCell>
-                <TableCell>
-                  {fac.isActive ? (
-                    <span className="text-green-600 font-semibold">Yes</span>
-                  ) : (
-                    <span className="text-red-600 font-semibold">No</span>
-                  )}
-                </TableCell>
-                <TableCell>{fac.priority}</TableCell>
-                <TableCell
-                  className="text-red-500 hover:text-red-800 cursor-pointer"
-                  onClick={handleDelete(fac._id)}
-                >
-                  <Trash2 />
+            {loading ? (
+              // Render 5 skeleton rows while loading
+              Array.from({ length: 5 }).map((_, idx) => (
+                <TableRow key={idx}>
+                  <TableCell>
+                    <Skeleton className="h-4 w-32" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-40" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-28" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-36" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-12" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-12" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-8" />
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : faculty.length > 0 ? (
+              faculty.map((fac) => (
+                <TableRow key={fac._id}>
+                  <TableCell className="font-medium">{fac.name}</TableCell>
+                  <TableCell>{fac.email}</TableCell>
+                  <TableCell>{fac.phone}</TableCell>
+                  <TableCell>{fac.designation}</TableCell>
+                  <TableCell>
+                    {fac.isActive ? (
+                      <span className="text-green-600 font-semibold">Yes</span>
+                    ) : (
+                      <span className="text-red-600 font-semibold">No</span>
+                    )}
+                  </TableCell>
+                  <TableCell>{fac.priority}</TableCell>
+                  <TableCell
+                    className="text-red-500 hover:text-red-800 cursor-pointer"
+                    onClick={handleDelete(fac._id)}
+                  >
+                    <Trash2 />
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={7} className="text-center">
+                  No faculty members found.
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </div>

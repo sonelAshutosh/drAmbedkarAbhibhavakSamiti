@@ -9,13 +9,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { deleteContactedPerson, getContactedPerson } from './action'
 import { Trash2 } from 'lucide-react'
 import { toast } from '@/hooks/use-toast'
+import { Skeleton } from '@/components/ui/skeleton'
 
 function ContactedPersonPage() {
   const [contactedPerson, setContactedPerson] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchContactedPerson = async () => {
@@ -26,6 +28,7 @@ function ContactedPersonPage() {
       } else {
         console.error(result.message)
       }
+      setLoading(false)
     }
 
     fetchContactedPerson()
@@ -54,47 +57,64 @@ function ContactedPersonPage() {
         <div className="text-lg tracking-wider font-semibold">
           Contacted Person
         </div>
-        {/* <div>
-            //TODO: Add excel downloading
-        </div> */}
       </div>
-      <div>
-        <Table>
-          <TableCaption>Create or Modify Contacted Persons</TableCaption>
-          <TableHeader className="border-2">
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Subject</TableHead>
-              <TableHead>Message</TableHead>
-              <TableHead>Action</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {contactedPerson.length > 0 ? (
-              contactedPerson.map((person) => (
-                <TableRow key={person._id}>
-                  <TableCell>{person.name}</TableCell>
-                  <TableCell>{person.email}</TableCell>
-                  <TableCell>{person.subject}</TableCell>
-                  <TableCell>{person.message}</TableCell>
-                  <TableCell>
-                    <button onClick={() => handleDelete(person._id)}>
-                      <Trash2 className="w-4 h-4 text-red-500" />
-                    </button>
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan="7" className="text-center">
-                  No Contacted Person found
+
+      <Table>
+        <TableCaption>Create or Modify Contacted Persons</TableCaption>
+        <TableHeader className="border-2">
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Subject</TableHead>
+            <TableHead>Message</TableHead>
+            <TableHead>Action</TableHead>
+          </TableRow>
+        </TableHeader>
+
+        <TableBody>
+          {loading ? (
+            Array.from({ length: 3 }).map((_, i) => (
+              <TableRow key={i}>
+                <TableCell>
+                  <Skeleton className="h-4 w-24" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-36" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-32" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-64" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-6" />
                 </TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+            ))
+          ) : contactedPerson.length > 0 ? (
+            contactedPerson.map((person) => (
+              <TableRow key={person._id}>
+                <TableCell>{person.name}</TableCell>
+                <TableCell>{person.email}</TableCell>
+                <TableCell>{person.subject}</TableCell>
+                <TableCell>{person.message}</TableCell>
+                <TableCell>
+                  <button onClick={() => handleDelete(person._id)}>
+                    <Trash2 className="w-4 h-4 text-red-500 hover:text-red-700" />
+                  </button>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center text-gray-500">
+                No Contacted Person found
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </div>
   )
 }
