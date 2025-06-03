@@ -92,7 +92,65 @@ export async function addMember(formData) {
   }
 }
 
-export async function updateMember() {}
+export async function updateMember(data) {
+  try {
+    await dbConnect()
+
+    const {
+      _id,
+      name,
+      email,
+      phone,
+      image,
+      designation = '',
+      fbURL = '',
+      instaURL = '',
+      twitterURL = '',
+      linkedinURL = '',
+      priority = 1000,
+      isActive,
+    } = data
+
+    const updatedMember = await Members.findByIdAndUpdate(
+      _id,
+      {
+        name,
+        email,
+        phone,
+        image,
+        designation,
+        fbURL,
+        instaURL,
+        twitterURL,
+        linkedinURL,
+        priority: parseInt(priority),
+        isActive: !!isActive,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
+
+    if (!updatedMember) {
+      return {
+        status: 'error',
+        message: 'Member not found',
+      }
+    }
+
+    return {
+      status: 'success',
+      message: 'Member updated successfully',
+    }
+  } catch (error) {
+    console.error('Update error:', error)
+    return {
+      status: 'error',
+      message: 'Error updating member',
+    }
+  }
+}
 
 export async function deleteMember(memberId) {
   try {

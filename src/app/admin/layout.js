@@ -6,7 +6,7 @@ function AdminLayout({ children }) {
   return (
     <SidebarProvider>
       <div className="flex h-screen w-screen">
-        <div className="text-secondary-dark border-r-2 border-primary-dark/50 dark:border-primary-base/50">
+        <div className="text-secondary-dark ">
           <AdminNav />
         </div>
         <div className="w-full">

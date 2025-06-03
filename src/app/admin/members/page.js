@@ -16,10 +16,13 @@ import Image from 'next/image'
 import { deleteMember, getMembers } from './action'
 import { toast } from '@/hooks/use-toast'
 import { Skeleton } from '@/components/ui/skeleton'
+import MemberEditModal from './MemberEditModal'
 
 function MembersPage() {
   const [members, setMembers] = useState([])
   const [loading, setLoading] = useState(true)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedMember, setSelectedMember] = useState(null)
 
   async function fetchData() {
     setLoading(true)
@@ -72,6 +75,7 @@ function MembersPage() {
               <TableHead>Designation</TableHead>
               <TableHead>Priority</TableHead>
               <TableHead>Image</TableHead>
+              <TableHead>Is Active</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -100,11 +104,21 @@ function MembersPage() {
                   <TableCell>
                     <Skeleton className="h-4 w-8" />
                   </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-8" />
+                  </TableCell>
                 </TableRow>
               ))
             ) : members.length > 0 ? (
               members.map((member) => (
-                <TableRow key={member._id}>
+                <TableRow
+                  key={member._id}
+                  className="cursor-pointer hover:bg-accent"
+                  onClick={() => {
+                    setSelectedMember(member)
+                    setModalOpen(true)
+                  }}
+                >
                   <TableCell>{member.name}</TableCell>
                   <TableCell>{member.email}</TableCell>
                   <TableCell>{member.phone}</TableCell>
@@ -121,13 +135,30 @@ function MembersPage() {
                         priority
                       />
                     ) : (
-                      'No Image'
+                      <Image
+                        src={'/images/dummy_image.jpg'}
+                        alt="Profile"
+                        className="w-10 h-10 rounded-full"
+                        width={40}
+                        height={40}
+                        priority
+                      />
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {member.isActive ? (
+                      <span className="text-green-600">Yes</span>
+                    ) : (
+                      <span className="text-red-600">No</span>
                     )}
                   </TableCell>
                   <TableCell>
                     <div
                       className="text-red-700 ml-2 hover:text-red-400 cursor-pointer"
-                      onClick={() => handleMemberDelete(member._id)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleMemberDelete(member._id)
+                      }}
                     >
                       <Trash2 />
                     </div>
@@ -144,6 +175,12 @@ function MembersPage() {
           </TableBody>
         </Table>
       </div>
+      <MemberEditModal
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+        member={selectedMember}
+        onMemberUpdated={fetchData}
+      />
     </div>
   )
 }

@@ -109,7 +109,7 @@ function AdminNav() {
   }
 
   return (
-    <Sidebar>
+    <Sidebar className="border-r-2 border-primary-dark/50 dark:border-primary-base/50">
       <SidebarContent>
         <SidebarGroup className="border-b-2 border-primary-dark/50 dark:border-primary-base/50">
           <SidebarGroupLabel className="text-lg text-secondary-dark font-semibold tracking-wider">
