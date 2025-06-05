@@ -13,6 +13,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="NosJ4uchaJsRC11izYWY7qRXxzNCtPEwFZjEcAjWch0"
+        />
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+      </head>
       <body className="antialiased bg-primary-base text-primary-dark dark:bg-primary-dark dark:text-primary-base">
         <AnimatePresence mode="wait">
           <LanguageProvider>
