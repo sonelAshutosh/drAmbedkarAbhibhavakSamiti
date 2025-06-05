@@ -3,11 +3,16 @@
 import dbConnect from '@/lib/dbConnect'
 import Members from '@/models/Members'
 
-export async function getMembers() {
+export async function getMembers(priority = false) {
   try {
     await dbConnect()
 
-    const members = await Members.find().lean()
+    const query = Members.find()
+    if (priority) {
+      query.sort({ priority: 1 })
+    }
+
+    const members = await query.lean()
     const membersJSON = JSON.parse(JSON.stringify(members)) // Ensure serializable objects
 
     return {

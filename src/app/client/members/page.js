@@ -17,7 +17,7 @@ export default function MembersPage() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const res = await getMembers()
+        const res = await getMembers(true)
 
         if (res.status === 'success') {
           setMembers(res.data)
