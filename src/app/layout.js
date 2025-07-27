@@ -7,7 +7,8 @@ import { Suspense } from 'react'
 
 export const metadata = {
   title: 'Dr. Ambedkar Abhibhavak Samiti',
-  description: 'NGO',
+  description:
+    'Dr. Ambedkar Abhibhavak Samiti is a dedicated NGO in Jodhpur working to uplift marginalized communities, inspired by the vision of Dr. Ambedkar.',
   icons: {
     icon: '/favicon.ico',
   },
