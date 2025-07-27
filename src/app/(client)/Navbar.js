@@ -5,25 +5,26 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState, useContext } from 'react'
 import { LanguageContext } from '@/lib/languageContext.js'
+import { usePathname } from 'next/navigation'
 
 const navItems = {
   en: [
-    { name: 'Home', link: '/client/home' },
-    { name: 'Campaigns', link: '/client/campaigns' },
-    { name: 'Gallery', link: '/client/gallery' },
-    { name: 'Certificates', link: '/client/certificates' },
-    { name: 'School', link: '/client/school' },
-    { name: 'About Us', link: '/client/about-us' },
-    { name: 'Contact Us', link: '/client/contact-us' },
+    { name: 'Home', link: '/' },
+    { name: 'Campaigns', link: '/campaigns' },
+    { name: 'Gallery', link: '/gallery' },
+    { name: 'Certificates', link: '/certificates' },
+    { name: 'School', link: '/school' },
+    { name: 'About Us', link: '/about-us' },
+    { name: 'Contact Us', link: '/contact-us' },
   ],
   hi: [
-    { name: 'मुखपृष्ठ', link: '/client/home' },
-    { name: 'अभियान', link: '/client/campaigns' },
-    { name: 'गैलरी', link: '/client/gallery' },
-    { name: 'प्रमाण पत्र', link: '/client/certificates' },
-    { name: 'विद्यालय', link: '/client/school' },
-    { name: 'हमारे बारे में', link: '/client/about' },
-    { name: 'संपर्क करें', link: '/client/contact-us' },
+    { name: 'मुखपृष्ठ', link: '/' },
+    { name: 'अभियान', link: '/campaigns' },
+    { name: 'गैलरी', link: '/gallery' },
+    { name: 'प्रमाण पत्र', link: '/certificates' },
+    { name: 'विद्यालय', link: '/school' },
+    { name: 'हमारे बारे में', link: '/about' },
+    { name: 'संपर्क करें', link: '/contact-us' },
   ],
 }
 
@@ -34,6 +35,7 @@ const fontSizeOptions = {
 
 const Navbar = () => {
   const { language, changeLanguage } = useContext(LanguageContext)
+  const pathname = usePathname()
 
   const [search, setSearch] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
@@ -86,7 +88,7 @@ const Navbar = () => {
       <div className="bg-primary-base bg-[url('https://www.transparenttextures.com/patterns/climpek.png')] bg-repeat bg-center text-primary-dark py-2 flex items-center justify-between shadow-md px-4 lg:px-20">
         {/* Logo */}
         <div className="h-16 w-16 rounded-full">
-          <Link href={'/client/home'}>
+          <Link href={'/'}>
             <Image
               src="/images/logo.jpg"
               alt="Logo"
@@ -103,7 +105,12 @@ const Navbar = () => {
           {navItems[language].map((item, index) => (
             <li
               key={index}
-              className="hover:underline font-semibold cursor-pointer"
+              className={`font-semibold cursor-pointer ${
+                pathname === item.link ||
+                (item.link === '/' && pathname === '/client/home')
+                  ? 'underline decoration-2 text-secondary-dark'
+                  : 'hover:underline'
+              }`}
             >
               <Link href={item.link}>{item.name}</Link>
             </li>

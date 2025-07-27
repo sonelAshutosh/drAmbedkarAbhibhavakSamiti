@@ -4,6 +4,7 @@ import './globals.css'
 import { LanguageProvider } from '@/lib/languageContext'
 import TopLoadingBar from '@/components/TopLoadingBar'
 import { Suspense } from 'react'
+import ClientLayoutWrapper from './ClientLayoutWrapper'
 
 export const metadata = {
   title: 'Dr. Ambedkar Abhibhavak Samiti',
@@ -29,8 +30,10 @@ export default function RootLayout({ children }) {
             <Suspense fallback={<div />}>
               <TopLoadingBar />
             </Suspense>
-            {children}
-            <Toaster />
+            <ClientLayoutWrapper>
+              {children}
+              <Toaster />
+            </ClientLayoutWrapper>
           </LanguageProvider>
         </AnimatePresence>
       </body>
