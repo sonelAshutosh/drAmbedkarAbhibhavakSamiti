@@ -21,19 +21,19 @@ function StudentCard({ student }) {
           />
         </div>
 
-        <div className="absolute bottom-0 left-0 h-16 w-full flex flex-col justify-center bg-gradient-to-br from-primary-base/60 to-accent-base/60 backdrop-blur-lg rounded-bl-lg rounded-br-lg group-hover:h-36 transition-all ease-in-out p-4 overflow-hidden">
-          <h1 className="text-xl font-semibold tracking-wide truncate">
+        <div className="absolute bottom-0 left-0 w-full flex flex-col justify-end bg-gradient-to-br from-primary-base/60 to-accent-base/60 backdrop-blur-lg rounded-b-lg transition-all ease-in-out overflow-hidden group-hover:h-40 min-h-16 h-16 p-4">
+          <h1 className="text-xl font-semibold tracking-wide truncate group-hover:whitespace-normal group-hover:overflow-visible">
             {student.name}
           </h1>
 
           <div className="hidden group-hover:flex flex-col gap-1 pt-2 text-sm">
             {student.stream && (
               <p>
-                <span className="font-medium">Stream:</span> {student.stream}
+                <span className="font-semibold">Stream -</span> {student.stream}
               </p>
             )}
             <p>
-              <span className="font-medium">Percentage:</span>{' '}
+              <span className="font-semibold">Percentage -</span>{' '}
               {student.percentage ?? 'N/A'}%
             </p>
 
@@ -42,7 +42,7 @@ function StudentCard({ student }) {
               {student.phone && (
                 <a
                   href={`tel:${student.phone}`}
-                  className="border-2 border-primary-base rounded-lg p-2 hover:scale-105 hover:text-secondary-base hover:border-secondary-base hover:bg-secondary-dark transition-all ease-in-out"
+                  className="border-2 border-secondary-dark rounded-lg p-2 hover:scale-105 hover:text-secondary-base hover:border-secondary-base hover:bg-secondary-dark transition-all ease-in-out"
                 >
                   <Phone size={18} />
                 </a>
@@ -50,7 +50,7 @@ function StudentCard({ student }) {
               {student.email && (
                 <a
                   href={`mailto:${student.email}`}
-                  className="border-2 border-primary-base rounded-lg p-2 hover:scale-105 hover:text-secondary-base hover:border-secondary-base hover:bg-secondary-dark transition-all ease-in-out"
+                  className="border-2 border-secondary-dark rounded-lg p-2 hover:scale-105 hover:text-secondary-base hover:border-secondary-base hover:bg-secondary-dark transition-all ease-in-out"
                 >
                   <Mail size={18} />
                 </a>
