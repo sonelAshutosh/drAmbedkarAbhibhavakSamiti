@@ -33,6 +33,7 @@ const Footer = () => {
         { name: 'Certificates', url: 'certificates' },
         { name: 'Volunteers', url: 'volunteers' },
         { name: 'Gallery', url: 'gallery' },
+        { name: 'Letters', url: 'letters' },
       ],
     },
     hi: {
@@ -52,6 +53,7 @@ const Footer = () => {
         { name: 'प्रमाण पत्र', url: 'certificates' },
         { name: 'स्वयंसेवक', url: 'volunteers' },
         { name: 'गेलरी', url: 'gallery' },
+        { name: 'पत्र', url: 'letters' },
       ],
     },
   }

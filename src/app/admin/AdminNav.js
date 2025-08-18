@@ -7,6 +7,7 @@ import {
   LogOut,
   Mail,
   MessageSquare,
+  Newspaper,
   Phone,
   TicketCheck,
   UserRound,
@@ -72,6 +73,11 @@ const orgItems = [
     title: 'Gallery',
     url: '/admin/gallery',
     icon: Image,
+  },
+  {
+    title: 'Letters (*New)',
+    url: '/admin/letters',
+    icon: Newspaper,
   },
   {
     title: 'Donators',

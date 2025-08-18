@@ -6,7 +6,8 @@ import Footer from './(client)/Footer'
 
 export default function ClientLayoutWrapper({ children }) {
   const pathname = usePathname()
-  const isAdmin = pathname?.startsWith('/admin')
+  const isAdmin =
+    pathname?.startsWith('/admin') || pathname?.startsWith('/login')
 
   return (
     <>
