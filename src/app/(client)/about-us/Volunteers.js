@@ -98,7 +98,7 @@ function Volunteers() {
 
         <div className="flex justify-end text-primary-base hover:text-accent-base font-semibold tracking-wide">
           <Link
-            href={'/client/volunteers'}
+            href={'/volunteers'}
             className="text-primary-base font-bold px-4 py-2 hover:underline transition"
           >
             {language === 'hi' ? 'सभी देखें' : 'View All'}

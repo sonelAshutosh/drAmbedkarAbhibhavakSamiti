@@ -68,7 +68,7 @@ function Latest({ language = 'en' }) {
       </Carousel>
 
       <div>
-        <Link href={'/client/school/news-and-announcement'}>
+        <Link href={'/school/news-and-announcement'}>
           <div className="text-accent-base text-right font-semibold cursor-pointer mt-8 hover:underline hover:text-accent-base/80 transition">
             {language === 'hi' ? 'सभी देखें' : 'See All'}
           </div>

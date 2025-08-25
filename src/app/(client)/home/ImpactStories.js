@@ -95,7 +95,7 @@ const ImpactStories = () => {
           {language === 'hi' ? 'प्रभाव कहानियाँ' : 'Impact Stories'}
         </h2>
         <Link
-          href="/client/testimonials"
+          href="/testimonials"
           className="text-accent-base text-sm hover:underline"
         >
           {language === 'hi' ? 'सभी देखें' : 'View All'}
@@ -120,7 +120,8 @@ const ImpactStories = () => {
           : stories?.map((story, index) => (
               <Link
                 key={index}
-                href={`/client/testimonials/${story._id}`}
+                // href={`/testimonials/${story._id}`}
+                href={`/testimonials/`}
                 className="relative bg-gradient-to-br from-primary-base via-accent-base to-primary-dark p-[2px] rounded-xl max-w-sm w-full transition hover:scale-[1.01] hover:shadow-xl"
               >
                 <div className="bg-secondary-dark/80 rounded-xl p-5 flex flex-col gap-4 h-full">

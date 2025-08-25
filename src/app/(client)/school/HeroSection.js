@@ -13,8 +13,8 @@ function HeroSection() {
 
   const paragraph =
     language === 'hi'
-      ? 'मंडोर, जोधपुर में डॉ. भीमराव अंबेडकर अभिभावक समिति द्वारा संचालित एक आवासीय उच्च माध्यमिक विद्यालय।'
-      : 'A residential higher secondary school in Mandore, Jodhpur, run by Dr. Bhimrao Ambedkar Abhibhavak Samiti.'
+      ? 'सामाजिक न्याय एंव अधिकारिता विभाग द्वारा संचालित विद्यालय'
+      : 'School run by the Department of Social Justice and Empowerment'
 
   return (
     <section className="px-4 lg:px-20 relative h-[70vh] md:h-[90vh] w-full overflow-hidden">
@@ -30,11 +30,9 @@ function HeroSection() {
       <div className="relative z-10 h-full w-full flex flex-col justify-center items-start text-left text-primary-base px-4">
         <h1 className="max-w-6xl text-4xl md:text-6xl font-bold mb-8 leading-tight">
           {headingParts[0]}{' '}
-          <span className="pt-4 mt-4 bg-gradient-to-r from-accent-base via-primary-base to-accent-dark bg-clip-text text-transparent">
-            {headingParts[1]}
-          </span>
+          <span className="pt-4 mt-4 text-primary-base">{headingParts[1]}</span>
         </h1>
-        <p className="text-lg md:text-2xl max-w-3xl bg-gradient-to-r from-primary-base via-secondary-base to-secondary-dark bg-clip-text text-transparent font-semibold">
+        <p className="text-lg md:text-2xl max-w-3xl text-primary-basefont-semibold">
           {paragraph}
         </p>
       </div>

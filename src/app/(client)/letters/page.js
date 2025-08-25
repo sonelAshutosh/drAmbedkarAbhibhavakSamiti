@@ -28,8 +28,8 @@ function LettersPage() {
         </div>
       </div>
 
-      {/* Scrollable Container */}
-      <div className=" overflow-y-auto space-y-10 pr-4">
+      {/* Responsive Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 pr-4 overflow-y-auto">
         {letters.map((letter, index) => (
           <div
             key={index}

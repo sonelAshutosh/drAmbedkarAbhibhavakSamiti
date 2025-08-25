@@ -118,7 +118,7 @@ const ExecutiveCommitteeMembers = () => {
 
         <div className="mt-8 justify-self-end">
           <Link
-            href="/client/members"
+            href="/members"
             className="text-secondary-dark font-bold px-4 py-2 hover:underline transition"
           >
             {language === 'hi' ? 'सभी देखें' : 'View All'}

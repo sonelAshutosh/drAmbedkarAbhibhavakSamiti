@@ -103,7 +103,7 @@ function TopStudents() {
 
         <div className="flex justify-end text-primary-base hover:text-accent-base font-semibold tracking-wide">
           <Link
-            href="/client/school/students"
+            href="/school/students"
             className="text-primary-base font-bold px-4 py-2 hover:underline transition"
           >
             {language === 'hi' ? 'सभी देखें' : 'View All'}

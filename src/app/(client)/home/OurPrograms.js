@@ -37,7 +37,7 @@ const OurPrograms = () => {
               {language === 'hi' ? 'हमारे अभियान' : 'Our Campaigns'}
             </h2>
             <Link
-              href="/client/campaigns"
+              href="/campaigns"
               className="text-secondary-dark text-sm hover:underline hover:scale-105"
             >
               {language === 'hi' ? 'सभी देखें' : 'View All'}
@@ -70,7 +70,7 @@ const OurPrograms = () => {
       en: latestCampaign.description,
       hi: latestCampaign.description,
     },
-    link: `/client/campaigns/${_.kebabCase(latestCampaign.name)}`,
+    link: `/campaigns/${_.kebabCase(latestCampaign.name)}`,
   }
 
   return (
@@ -81,7 +81,7 @@ const OurPrograms = () => {
             {language === 'hi' ? 'हमारे अभियान' : 'Our Campaigns'}
           </h2>
           <Link
-            href="/client/campaigns"
+            href="/campaigns"
             className="text-secondary-dark text-sm hover:underline hover:scale-105"
           >
             {language === 'hi' ? 'सभी देखें' : 'View All'}
@@ -106,12 +106,12 @@ const OurPrograms = () => {
               <p className="text-secondary-dark/90 font-semibold text-sm sm:text-base mt-2">
                 {program.description[language]}
               </p>
-              <Link
+              {/* <Link
                 href={program.link}
                 className="text-accent-base font-semibold mt-3 block hover:underline text-sm sm:text-base"
               >
                 {language === 'hi' ? 'और पढ़ें' : 'Read More'}
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

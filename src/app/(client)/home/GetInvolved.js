@@ -83,7 +83,7 @@ const GetInvolved = () => {
               {donateDescription}
             </p>
             <Link
-              href="/client/donate"
+              href="/donate"
               className="bg-accent-base text-white px-6 py-2 rounded-lg shadow hover:bg-accent-dark transition"
             >
               {donateNow}
@@ -107,7 +107,7 @@ const GetInvolved = () => {
               {volunteerDescription}
             </p>
             <Link
-              href="/client/contact-us"
+              href="/contact-us"
               className="bg-accent-base text-white px-6 py-2 rounded-lg shadow hover:bg-accent-dark transition"
             >
               {becomeVolunteer}
@@ -132,7 +132,7 @@ const GetInvolved = () => {
               {membershipDescription}
             </p>
             <Link
-              href="/client/contact-us"
+              href="/contact-us"
               className="bg-accent-base text-white px-6 py-2 rounded-lg shadow hover:bg-accent-dark transition"
             >
               {contactUs}
