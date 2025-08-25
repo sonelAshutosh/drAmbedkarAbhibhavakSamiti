@@ -151,6 +151,26 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
+        <div>
+          <div className="mt-8 flex flex-col items-center">
+            <span className="text-lg font-semibold mb-2 text-primary-base">
+              {language === 'hi' ? 'दान के लिए QR' : 'Donation QR'}
+            </span>
+            <Image
+              src="/images/donate_qr.jpg"
+              alt="Donation QR"
+              width={200}
+              height={200}
+              className="rounded-lg border border-primary-base"
+            />
+            <a
+              href="upi://pay?pa=42360534745@sbi&pn=DR%20BHIMRAO%20AMBEDKAR%20ABHIB"
+              className="inline-block mt-4 px-8 py-3 bg-accent-base text-primary-base font-bold rounded-full hover:bg-accent-dark transition"
+            >
+              {language === 'hi' ? 'UPI से दान करें' : 'Donate via UPI'}
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* Overlay (closes menu on click) */}
