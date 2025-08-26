@@ -6,6 +6,7 @@ import {
   LayoutGrid,
   LogOut,
   Mail,
+  Mailbox,
   MessageSquare,
   Newspaper,
   Phone,
@@ -52,7 +53,7 @@ const orgItems = [
   {
     title: 'Newsletter Subscribers',
     url: '/admin/newsletterSubscribers',
-    icon: Mail,
+    icon: Mailbox,
   },
   {
     title: 'Contacted Persons',
@@ -77,6 +78,11 @@ const orgItems = [
   {
     title: 'Letters (*New)',
     url: '/admin/letters',
+    icon: Mail,
+  },
+  {
+    title: 'Press (*New)',
+    url: '/admin/press',
     icon: Newspaper,
   },
   {

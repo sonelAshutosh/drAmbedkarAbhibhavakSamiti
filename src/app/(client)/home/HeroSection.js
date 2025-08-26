@@ -17,14 +17,14 @@ import Autoplay from 'embla-carousel-autoplay'
 
 const translations = {
   en: {
-    title: 'Dr. Ambedkar',
+    title: 'Dr. B. R. Ambedkar',
     subtitle: 'Abhibhavak Samiti',
     joinUs: 'Join Us',
     donate: 'Donate',
     ourLeaders: 'Our Leaders',
   },
   hi: {
-    title: 'डॉ. अंबेडकर',
+    title: 'डॉ. भीमराव आंबेडकर',
     subtitle: 'अभिभावक समिति',
     joinUs: 'हमसे जुड़ें',
     donate: 'दान करें',
