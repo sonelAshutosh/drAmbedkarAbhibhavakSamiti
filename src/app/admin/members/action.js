@@ -1,9 +1,10 @@
 'use server'
 
+import { cache } from 'react'
 import dbConnect from '@/lib/dbConnect'
 import Members from '@/models/Members'
 
-export async function getMembers(priority = false) {
+export const getMembers = cache(async (priority = false) => {
   try {
     await dbConnect()
 
@@ -25,9 +26,9 @@ export async function getMembers(priority = false) {
       message: 'Failed to fetch members',
     }
   }
-}
+})
 
-export async function getTopThreeMembers() {
+export const getTopThreeMembers = cache(async () => {
   try {
     await dbConnect()
 
@@ -44,7 +45,7 @@ export async function getTopThreeMembers() {
       message: 'Failed to fetch members',
     }
   }
-}
+})
 
 export async function getThreeMembersByPriority() {
   try {

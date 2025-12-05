@@ -1,8 +1,7 @@
-'use client'
-
-import React, { useContext } from 'react'
+import React from 'react'
 import Image from 'next/image'
-import { LanguageContext } from '@/lib/languageContext'
+import PageHeader from '@/components/PageHeader'
+import SectionHeading from '@/components/SectionHeading'
 import ExecutiveCommitteeMembers from '../home/ExecutiveCommitteeMembers'
 import MissionVisionStory from './MissionVisionStory'
 import Volunteers from './Volunteers'
@@ -50,24 +49,22 @@ const content = {
   },
 }
 
-function AboutUsPage() {
-  const { language } = useContext(LanguageContext)
+// Server Component
+export default async function AboutUsPage({ searchParams }) {
+  const language = searchParams?.lang || 'en'
 
   return (
     <div className="relative">
       {/* Parallax Section */}
-      <div className="relative h-screen bg-fixed bg-cover bg-center bg-[url('/images/about_us.png')] flex items-center justify-center before:absolute before:inset-0 before:bg-secondary-dark/50">
-        <h1 className="relative z-10 text-5xl lg:text-7xl font-bold text-primary-base drop-shadow-lg">
-          {content.heading[language]}
-        </h1>
-      </div>
+      <PageHeader
+        title={content.heading[language]}
+        backgroundImage="/images/about_us.png"
+      />
 
       {/* Content Section */}
       <div className="py-16 px-4 lg:px-20">
         <div className="py-4 rounded-lg">
-          <h2 className="text-4xl font-semibold mb-10 text-left">
-            {content.sectionTitle[language]}
-          </h2>
+          <SectionHeading title={content.sectionTitle[language]} />
 
           <div className="flex flex-col lg:flex-row items-center lg:items-center gap-10">
             {/* Text Section */}
@@ -90,11 +87,9 @@ function AboutUsPage() {
       </div>
       <div>
         <MissionVisionStory />
-        <ExecutiveCommitteeMembers />
+        <ExecutiveCommitteeMembers language={language} />
         <Volunteers />
       </div>
     </div>
   )
 }
-
-export default AboutUsPage

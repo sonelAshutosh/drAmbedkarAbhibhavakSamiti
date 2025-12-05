@@ -1,9 +1,10 @@
 'use server'
 
+import { cache } from 'react'
 import dbConnect from '@/lib/dbConnect'
 import Campaigns from '@/models/Campaigns'
 
-export async function getCampaigns() {
+export const getCampaigns = cache(async () => {
   try {
     await dbConnect()
     const campaigns = await Campaigns.find().sort({ date: -1 })
@@ -18,9 +19,9 @@ export async function getCampaigns() {
       message: 'An error occurred while fetching the campaigns.',
     }
   }
-}
+})
 
-export async function getLatestCampaign() {
+export const getLatestCampaign = cache(async () => {
   try {
     await dbConnect()
 
@@ -44,7 +45,7 @@ export async function getLatestCampaign() {
       message: 'An error occurred while fetching the latest campaign.',
     }
   }
-}
+})
 
 export async function addCampaign(formData) {
   try {

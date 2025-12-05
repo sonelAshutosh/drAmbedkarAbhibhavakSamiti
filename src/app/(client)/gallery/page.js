@@ -13,6 +13,7 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination'
 import Modal from './Modal'
+import SectionHeading from '@/components/SectionHeading'
 
 function GalleryPage() {
   const [galleryData, setGalleryData] = useState([])
@@ -46,8 +47,8 @@ function GalleryPage() {
   }
 
   return (
-    <div className="py-4 px-4 lg:px-20 text-secondary-dark">
-      <div className="text-lg tracking-wider font-semibold py-2">Gallery</div>
+    <div className="page-padding text-secondary-dark">
+      <SectionHeading title="Gallery" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {galleryData.map((item) =>
           item.images.map((img, index) => (

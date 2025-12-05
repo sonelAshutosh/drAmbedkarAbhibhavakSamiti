@@ -3,9 +3,12 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { getPress } from '@/app/admin/press/actions'
+import SectionHeading from '@/components/SectionHeading'
+import ImageModal from '@/components/ImageModal'
 
 function PressPage() {
   const [press, setPress] = useState([])
+  const [selectedImage, setSelectedImage] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,45 +20,56 @@ function PressPage() {
   }, [])
 
   return (
-    <div className="w-full h-full px-4 lg:px-20 text-secondary-dark dark:text-primary-base py-10">
-      {/* Heading */}
-      <div className="text-6xl lg:text-7xl text-secondary-dark dark:text-secondary-base tracking-wide font-bold pb-10">
-        <div className="flex flex-col lg:flex-row">
-          <span>In the</span>
-          <span className="mx-2 bg-gradient-to-tr from-accent-base to-primary-dark bg-clip-text text-transparent">
-            Press
-          </span>
-        </div>
-      </div>
+    <div className="page-padding text-secondary-dark dark:text-primary-base">
+      <SectionHeading title="In the Press" />
 
       {/* Responsive Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 pr-4 overflow-y-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {press.map((item, index) => (
           <div
             key={index}
-            className="bg-gradient-to-tr from-accent-base to-primary-dark p-0.5 rounded-lg"
+            className="group relative bg-gradient-to-tr from-accent-base to-primary-dark p-0.5 rounded-lg card-hover"
           >
-            <div className="bg-primary-base dark:bg-black rounded-lg p-1">
-              <Image
-                src={item.image || '/images/image-not-available.jpg'}
-                alt="press"
-                width={700}
-                height={500}
-                className="rounded-lg w-full object-contain"
-              />
-              <div className="p-4 text-center">
-                <h3 className="text-xl font-semibold">{item.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+            <div className="h-full bg-primary-base dark:bg-secondary-dark rounded-lg overflow-hidden flex flex-col">
+              {/* Image Container with Fixed Aspect Ratio */}
+              <div
+                className="relative w-full aspect-[4/3] bg-secondary-base/10 cursor-pointer"
+                onClick={() =>
+                  setSelectedImage({ src: item.image, alt: item.title })
+                }
+              >
+                <Image
+                  src={item.image || '/images/image-not-available.jpg'}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-sm font-medium">
+                    Click to view
+                  </span>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-4 flex flex-col gap-2 flex-grow">
+                <h3 className="text-lg font-semibold text-secondary-dark dark:text-primary-base line-clamp-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-secondary-dark/70 dark:text-primary-base/70">
                   {item.source || 'Unknown Source'}
                 </p>
+
                 {item.link && (
                   <a
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-2 inline-block text-accent-base hover:underline"
+                    className="mt-auto inline-flex items-center text-accent-dark dark:text-accent-base hover:underline font-medium text-sm"
                   >
-                    Read More
+                    Read More →
                   </a>
                 )}
               </div>
@@ -63,6 +77,15 @@ function PressPage() {
           </div>
         ))}
       </div>
+
+      {/* Fullscreen Image Modal */}
+      {selectedImage && (
+        <ImageModal
+          src={selectedImage.src}
+          alt={selectedImage.alt}
+          onClose={() => setSelectedImage(null)}
+        />
+      )}
     </div>
   )
 }

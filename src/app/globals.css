@@ -30,6 +30,21 @@ body {
   }
 }
 
+/* Consistent spacing utilities */
+@layer utilities {
+  .section-padding {
+    @apply py-12 px-4 lg:px-20;
+  }
+
+  .page-padding {
+    @apply py-10 px-4 lg:px-20;
+  }
+
+  .content-container {
+    @apply max-w-screen-xl mx-auto;
+  }
+}
+
 /* Hide scrollbar in Chrome, Safari and Opera */
 html::-webkit-scrollbar {
   display: none;
@@ -39,6 +54,11 @@ html::-webkit-scrollbar {
 html {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  @apply transition-colors duration-200;
 }
 
 /* Full-screen white overlay */
@@ -73,7 +93,8 @@ html {
     transform: rotate(360deg);
   }
 }
-/* styles/globals.css */
+
+/* Modal styles */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -91,4 +112,24 @@ html {
   max-width: 90%;
   max-height: 90%;
   overflow-y: auto;
+}
+
+/* Consistent card hover effects */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+/* Pulsing shadow animation for featured items */
+@keyframes pulse-shadow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.pulsing-shadow {
+  animation: pulse-shadow 2s ease-in-out infinite;
 }

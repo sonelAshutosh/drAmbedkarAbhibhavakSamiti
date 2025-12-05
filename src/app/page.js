@@ -1,7 +1,4 @@
-'use client'
-
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { Suspense } from 'react'
 import HeroSection from './(client)/home/HeroSection'
 import ServicesStats from './(client)/home/ServicesStats'
 import InfoCards from './(client)/home/InfoCards'
@@ -12,7 +9,15 @@ import ExecutiveCommitteeMembers from './(client)/home/ExecutiveCommitteeMembers
 import GetInvolved from './(client)/home/GetInvolved'
 import NewsSection from './(client)/home/NewsSection'
 
-export default function Home() {
+// Loading component for sections
+function SectionLoading() {
+  return <div className="h-64 animate-pulse bg-secondary-base/10 rounded-lg" />
+}
+
+// Server Component
+export default async function Home({ searchParams }) {
+  const language = searchParams?.lang || 'en'
+
   return (
     <div>
       <HeroSection />
@@ -21,7 +26,11 @@ export default function Home() {
       <MissionSection />
       <OurPrograms />
       <ImpactStories />
-      <ExecutiveCommitteeMembers />
+
+      <Suspense fallback={<SectionLoading />}>
+        <ExecutiveCommitteeMembers language={language} />
+      </Suspense>
+
       <GetInvolved />
       <NewsSection />
     </div>
